@@ -1,0 +1,3 @@
+class BackgroundObject extends MoveableObject{
+    
+}

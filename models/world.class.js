@@ -1,6 +1,7 @@
 class World {
   character = new Character();
   enemies = [new Chicken(), new Chicken(), new Chicken()];
+  clouds = [new Clouds(), new Clouds(),new Clouds(),]
   ctx;
   canvas;
   constructor(canvas) {
@@ -28,6 +29,15 @@ class World {
             enemy.y,
             enemy.height,
             enemy.width
+          );
+    })
+    this.clouds.forEach(clouds => {
+        this.ctx.drawImage(
+            clouds.img,
+            clouds.x,
+            clouds.y,
+            clouds.height,
+            clouds.width
           );
     })
     //FDraw() wird immer wieder ausgeführt
