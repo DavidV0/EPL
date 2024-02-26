@@ -1,16 +1,17 @@
 let canvas;
-let character = new MoveableObject();
+
 let ctx;
 
-
+let world;
 
 /**
  * 
  */
 function init(){
     canvas = document.getElementById('canvas')
+    world = new World(canvas);
 
-    // diese Variable greift auf das Canvas zu lässt drauf malen
-    ctx = canvas.getContext('2d')
+
+    console.log("My Character is: ", world.character);
     
 }
