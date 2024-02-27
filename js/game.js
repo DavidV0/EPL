@@ -8,11 +8,13 @@ let keyboard = new Keyboard();
  */
 function init() {
   canvas = document.getElementById("canvas");
-  world = new World(canvas);
+  world = new World(canvas, keyboard);
 
   console.log("My Character is: ", world.character);
 }
 
+
+// detecting if a key is pressed
 document.addEventListener('keydown', (e) => {
 	if (e.keyCode == 39) {
 		keyboard.RIGHT = true;
@@ -34,6 +36,8 @@ document.addEventListener('keydown', (e) => {
 	}
 });
 
+
+// detecting if a key is released
 document.addEventListener('keyup', (e) => {
 	if (e.keyCode == 39) {
 		keyboard.RIGHT = false;

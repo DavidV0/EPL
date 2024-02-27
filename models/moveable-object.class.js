@@ -7,7 +7,7 @@ class MoveableObject {
   imageCache = {};
   currentImage = 0;
   speed = 0.15;
-
+otherDirection = false
   /**
    * loads the image of the object
    * @param {*} path the image path
