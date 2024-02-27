@@ -11,6 +11,7 @@ class World {
   ctx;
   canvas;
   keyboard;
+  camera_x = 0
   constructor(canvas, keyboard) {
     this.canvas = canvas;
     // diese Variable greift auf das Canvas zu lässt drauf malen
@@ -45,18 +46,27 @@ class World {
   addToMap(obj) {
 
     if(obj.otherDirection){
-      this.ctx.save();
-      this.ctx.translate(obj.width, 0)
-      this.ctx.scale(-1,1)
-      obj.x = obj.x *-1
+      this.flipImage(obj)
     }
 
     this.ctx.drawImage(obj.img, obj.x, obj.y, obj.width, obj.height);
 
     if(obj.otherDirection){
-      obj.x = obj.x *-1
-      this.ctx.restore()
+        this.flipImageBack(obj)
     }
+  }
+
+
+  flipImage(obj){
+    this.ctx.save();
+    this.ctx.translate(obj.width, 0)
+    this.ctx.scale(-1,1)
+    obj.x = obj.x *-1
+  }
+
+  flipImageBack(obj){
+    obj.x = obj.x *-1
+      this.ctx.restore()
   }
 
   /**
@@ -64,10 +74,17 @@ class World {
    */
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+    this.ctx.translate(this.camera_x, 0);
+
+
     this.addObjectsToMap(this.backgroundObjects);
     this.addToMap(this.character);
     this.addObjectsToMap(this.enemies);
     this.addObjectsToMap(this.clouds);
+
+    this.ctx.translate(-this.camera_x, 0);
+
 
     //Draw() wird immer wieder ausgeführt
     let self = this;
