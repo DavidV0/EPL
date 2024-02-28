@@ -12,12 +12,23 @@ class World {
     this.keyboard = keyboard;
     this.draw();
     this.setWorld();
+    this.checkCollisions();
   }
   /**
    * config our character with all the world objects
    */
   setWorld(){
     this.character.world = this
+  }
+
+  checkCollisions(){
+    setInterval(()=>{
+        this.level.enemies.forEach((enemy)=>{
+          if(this.character.isColliding(enemy)){
+            this.character.hit();
+          }
+        })
+    }, 1000/60)
   }
 
   /**
@@ -41,8 +52,8 @@ class World {
     if(obj.otherDirection){
       this.flipImage(obj)
     }
-
-    this.ctx.drawImage(obj.img, obj.x, obj.y, obj.width, obj.height);
+    obj.draw(this.ctx)
+    obj.drawFrame(this.ctx)
 
     if(obj.otherDirection){
         this.flipImageBack(obj)
@@ -85,4 +96,6 @@ class World {
       self.draw();
     });
   }
+
+  
 }
