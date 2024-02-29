@@ -1,5 +1,5 @@
-class MoveableObject {
-  x = 120;
+class MoveableObject extends DrawAbleObject {
+  x = 120; 
   y = 280;
   height = 150;
   width = 100;
@@ -12,26 +12,9 @@ class MoveableObject {
   otherDirection = false;
   energy = 100;
   lastHit = 0;
-  /**
-   * loads the image of the object
-   * @param {*} path the image path
-   */
-  loadImage(path) {
-    this.img = new Image();
-    this.img.src = path;
-  }
+ 
 
-  /**
-   * loads all images of the object
-   * @param {*} arr the image Cache
-   */
-  loadImages(arr) {
-    arr.forEach((path) => {
-      let img = new Image();
-      img.src = path;
-      this.imageCache[path] = img;
-    });
-  }
+  
 
   moveRight() {
     this.x += this.speed;
@@ -65,19 +48,7 @@ class MoveableObject {
     this.speedY = 30;
   }
 
-  draw(ctx) {
-    ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-  }
-
-  drawFrame(ctx) {
-    if (this instanceof Character || this instanceof Chicken) {
-      ctx.beginPath();
-      ctx.lineWidth = "6";
-      ctx.strokeStyle = "blue";
-      ctx.rect(this.x, this.y, this.width, this.height);
-      ctx.stroke();
-    }
-  }
+  
 
   isColliding(obj) {
     return (

@@ -5,6 +5,7 @@ class World {
   canvas;
   keyboard;
   camera_x = 0
+  statusBar = new StatusBar();
   constructor(canvas, keyboard) {
     this.canvas = canvas;
     // diese Variable greift auf das Canvas zu lässt drauf malen
@@ -87,7 +88,10 @@ class World {
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.level.clouds);
 
+
     this.ctx.translate(-this.camera_x, 0);
+    this.addToMap(this.statusBar)
+
 
 
     //Draw() wird immer wieder ausgeführt
