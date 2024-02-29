@@ -44,7 +44,7 @@ class Endboss extends MoveableObject {
       } else {
         this.playAnimation(this.IMAGES_WALKING);
       }
-      if (this.x> 1500 && this.hadFirstContact === false) {
+      if (world.character.x> 1500 && this.hadFirstContact === false) {
         i = 0;
         hadFirstContact = true;
       }
