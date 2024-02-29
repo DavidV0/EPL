@@ -28,7 +28,7 @@ class World {
             this.character.hit();
           }
         })
-    }, 1000/60)
+    },200)
   }
 
   /**

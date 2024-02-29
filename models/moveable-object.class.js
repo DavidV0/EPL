@@ -11,7 +11,7 @@ class MoveableObject {
   accelaration = 2.5;
   otherDirection = false;
   energy = 100;
-  lastHit = 100;
+  lastHit = 0;
   /**
    * loads the image of the object
    * @param {*} path the image path
@@ -89,22 +89,18 @@ class MoveableObject {
   }
 
   hit() {
-    
-    console.log( "Characters energy is : ",this.energy)
-
+    this.energy -= 5;
     if (this.energy < 0) {
       this.energy = 0;
     } else {
-      this.energy -= 5;
       this.lastHit = new Date().getTime();
     }
   }
 
   isHurt() {
-    let timepassed = new Date().getTime();
-    -this.lastHit; // Difference in ms
+    let timepassed = new Date().getTime() -this.lastHit; // Difference in ms
     timepassed = timepassed / 1000; // Difference in s
-    if (timepassed < 1) {
+    if (timepassed <= 1) {
       return true;
     } else {
       return false;
@@ -112,6 +108,6 @@ class MoveableObject {
   }
 
   isDead() {
-    return this.energy === 0;
+    return this.energy == 0;
   }
 }
