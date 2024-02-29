@@ -15,8 +15,7 @@ class World {
     this.ctx = canvas.getContext("2d");
     this.keyboard = keyboard;
     this.setWorld();
-   
-  
+    this.startGame();
   }
   /**
    * config our character with all the world objects
@@ -25,14 +24,17 @@ class World {
     this.character.world = this;
   }
 
-
-  startGame(){
-    initLevel();
+  /**
+   * starts the game loop and the drawing
+   */
+  startGame() {
     this.draw();
     this.run();
-
   }
 
+  /**
+   * starts checking the game logic like collision, throwing and etc
+   */
   run() {
     setInterval(() => {
       this.checkCollisions();
@@ -40,6 +42,9 @@ class World {
     }, 200);
   }
 
+  /**
+   * checks if the button is clicked to throw the bottles
+   */
   checkThrowObjects() {
     if (this.keyboard.D) {
       let bottle = new ThrowableObject(
@@ -50,6 +55,9 @@ class World {
     }
   }
 
+  /**
+   * checks if the character is colliding with an enemy
+   */
   checkCollisions() {
     setInterval(() => {
       this.level.enemies.forEach((enemy) => {
@@ -89,6 +97,10 @@ class World {
     }
   }
 
+  /**
+   * mirrors the image properly so the character looking into the right direction
+   * @param {*} obj
+   */
   flipImage(obj) {
     this.ctx.save();
     this.ctx.translate(obj.width, 0);
@@ -96,6 +108,10 @@ class World {
     obj.x = obj.x * -1;
   }
 
+  /**
+   * mirrors the image properly so the character looking into the right direction
+   * @param {*} obj
+   */
   flipImageBack(obj) {
     obj.x = obj.x * -1;
     this.ctx.restore();

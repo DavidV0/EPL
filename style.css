@@ -1,43 +1,106 @@
-canvas{
-    background-color: black;
-    display: block;
+canvas {
+  display: block;
 }
 
-body{
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    width: 100vw;
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  flex-direction: column;
+  background-image: url("./img/9_intro_outro_screens/start/desert.jpg");
+  background-position: center;
+  background-size: cover;
+  font-family: "zabras", Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  margin: 0;
+  font-size: 64px;
+  letter-spacing: 3px;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+  transform: skew(-20deg) scale(1);
+  margin-top: -100px;
+}
+
+.container {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  display: flex;
+  height: 480px ;
+  width: 720px;
+  justify-content: center;
+  background-image: url("./img/9_intro_outro_screens/start/startscreen_1.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  
+}
+
+.start-game-btn {
+  margin-top: 20px;
+  position: fixed;
+  background-color: #ff9600;
+  color: lightgrey;
+  font-size: 38px;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 10px;
+  border: lightgrey 4px solid;
+  width: 200px;
+  height: 44px;
+  transform: skew(-20deg) scale(1);
+  animation: buttonScale 2s infinite;
+  font-family: "zabras";
+  letter-spacing: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.start-game-btn:hover {
+  background-color: #ffb900;
+  color: white;
+  border: white 4px solid;
+}
+
+@keyframes buttonScale {
+  0% {
+    transform: skew(-20deg) scale(1);
+  }
+
+  50% {
+    transform: skew(-20deg) scale(1.1);
+  }
+
+  100% {
+    transform: skew(-20deg) scale(1);
+  }
+}
+
+
+.d-none{
+  display: none;
+}
+
+/* Smartphones ----------*/
+
+@media only screen and (max-width: 720px) {
+  canvas {
+    width: 100%;
+  }
+}
+
+/* Smartphones ----------*/
+
+@media only screen and (max-height: 480px) {
+  canvas {
     height: 100vh;
-    align-items: center;
-    flex-direction: column;
-    background-image: url("./img/9_intro_outro_screens/start/desert.jpg");
-    background-position: center;
-    background-size: cover;
-    font-family: 'zabras', Arial, Helvetica, sans-serif;
+    width: 100vw;
+  }
 }
-
-h1{
-    font-size: 64px;
-    letter-spacing: 3px;
-    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
-}
-
-
-/* Smartphones ----------*/
-
-@media only screen and (max-width: 720px){
-    canvas{
-        width: 100%;
-    }
-}
-
-/* Smartphones ----------*/
-
-@media only screen and (max-height: 480px){
-    canvas{
-        height: 100vh;
-        width: 100vw;
-    }
-}
-

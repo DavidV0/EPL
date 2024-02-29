@@ -4,13 +4,32 @@ let world;
 let keyboard = new Keyboard();
 
 /**
- *
+ * creates the world
  */
 function init() {
   canvas = document.getElementById("canvas");
   world = new World(canvas, keyboard);
+}
 
-  console.log("My Character is: ", world.character);
+
+/**
+ * sets the start screen
+ */
+function showStartScreen(){
+	document.getElementById("container").classList.add("container")
+}
+
+
+/**
+ * removes the start screen and the creates the game
+ */
+function removeStartScreen(){
+	levelInit();
+
+	init()
+	document.getElementById("container").classList.add("d-none");
+	document.getElementById("start-game-btn").classList.add("d-none")
+
 }
 
 
