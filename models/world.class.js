@@ -6,6 +6,8 @@ class World {
   keyboard;
   camera_x = 0
   statusBar = new StatusBar();
+  coinStatusBar = new CoinStatusBar();
+  bottelStatusBar = new BottleStatusBar();
   constructor(canvas, keyboard) {
     this.canvas = canvas;
     // diese Variable greift auf das Canvas zu lässt drauf malen
@@ -27,6 +29,7 @@ class World {
         this.level.enemies.forEach((enemy)=>{
           if(this.character.isColliding(enemy)){
             this.character.hit();
+            this.statusBar.setPercentage(this.character.energy)
           }
         })
     },200)
@@ -89,8 +92,18 @@ class World {
     this.addObjectsToMap(this.level.clouds);
 
 
-    this.ctx.translate(-this.camera_x, 0);
+    // section for static objects
+    this.ctx.translate(-this.camera_x, 0); // set Camera pos back
+
     this.addToMap(this.statusBar)
+    this.addToMap(this.coinStatusBar)
+    this.addToMap(this.bottelStatusBar)
+
+
+    this.ctx.translate(this.camera_x, 0);// set Camera pos forward
+
+
+    this.ctx.translate(-this.camera_x, 0);
 
 
 
