@@ -31,16 +31,67 @@
     <script src="./levels/level1.js"></script>
 
     <script src="./models/world.class.js"></script>
-    <script src="./js/game.js"></script>
+    <script defer src="./js/game.js"></script>
     <title>Document</title>
   </head>
   <body onload="showStartScreen()">
     <h1>El pollo loco</h1>
     <div id="container">
-      <button onclick="removeStartScreen()" id="start-game-btn" class="start-game-btn">Start Game!</button>
+      <button
+        onclick="removeStartScreen()"
+        id="start-game-btn"
+        class="start-game-btn"
+      >
+        Start Game!
+      </button>
     </div>
     <canvas id="canvas" width="720" height="480"></canvas>
-
-   
+    <div class="screen-btn-container">
+      <img
+        onclick="toggleMusic()"
+        src="./img/start_screen_buttons/mute.svg"
+        alt="sound icon"
+        id="sound-btn"
+        class="d-none"
+      />
+      <img
+        onclick="openSettings()"
+        src="./img/start_screen_buttons/menu.svg"
+        alt="sound icon"
+        id="settings-btn"
+        class="d-none"
+      />
+      <img
+        onclick="toggleFullscreen()"
+        src="./img/start_screen_buttons/fullscreen.svg"
+        alt="sound icon"
+        id="fullscreen-btn"
+        class="d-none"
+      />
+    </div>
+    <div class="menu-screen d-none" id="menu-screen">
+      <div class="menu-btn close-btn" >
+        <img src="./img/start_screen_buttons/close.svg" alt="" id="close-btn" onclick="closeSettings()">
+      </div>
+      <div class="menu-description">
+        <div class="menu-btn">
+          <img src="./img/start_screen_buttons/left.png" />
+          <span class="menu-btn-text">WALK LEFT</span>
+        </div>
+        <div class="menu-btn">
+          <img src="./img/start_screen_buttons/right.png" />
+          <span class="menu-btn-text">WALK RIGHT</span>
+        </div>
+        <div class="menu-btn">
+          <img src="./img/start_screen_buttons/space.png" />
+          <span class="menu-btn-text">JUMP</span>
+        </div>
+        <div class="menu-btn" style="margin-top: 1px">
+          <span class="d">D</span>
+          <span class="menu-btn-text">THROW BOTTLE</span>
+        </div>
+      </div>
+     
+    </div>
   </body>
 </html>

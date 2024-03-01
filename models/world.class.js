@@ -9,6 +9,8 @@ class World {
   coinStatusBar = new CoinStatusBar();
   bottelStatusBar = new BottleStatusBar();
   throwableObjects = [];
+
+
   constructor(canvas, keyboard) {
     this.canvas = canvas;
     // diese Variable greift auf das Canvas zu lässt drauf malen
@@ -17,6 +19,10 @@ class World {
     this.setWorld();
     this.startGame();
   }
+
+
+
+
   /**
    * config our character with all the world objects
    */
@@ -30,6 +36,7 @@ class World {
   startGame() {
     this.draw();
     this.run();
+    closeSettings();
   }
 
   /**
@@ -150,4 +157,6 @@ class World {
       self.draw();
     });
   }
+
+  
 }

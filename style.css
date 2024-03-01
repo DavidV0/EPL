@@ -55,7 +55,7 @@ h1 {
   height: 44px;
   transform: skew(-20deg) scale(1);
   animation: buttonScale 2s infinite;
-  font-family: "zabras";
+  font-family: "zabras", Arial, Helvetica, sans-serif;
   letter-spacing: 3px;
   display: flex;
   align-items: center;
@@ -83,6 +83,81 @@ h1 {
   }
 }
 
+
+
+.screen-btn-container{
+  position: absolute;
+  margin-top: -420px;
+  margin-left: 560px;
+  display: flex;
+  gap: 8px;
+}
+
+.screen-btn{
+  height: 30px;
+  width:  30px;
+}
+.screen-btn:hover{
+  transform: scale(1.2);
+}
+
+.menu-screen{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 480px;
+  width: 720px;
+  flex-direction: column;
+  background-color: rgba(251, 236, 236, 0.618);
+  border-radius: 8px;
+  
+}
+
+.menu-description {
+	display: flex;
+  flex-direction: column;
+	align-items: start;
+	font-size: 20px;
+  gap: 12px;
+
+}
+
+
+.menu-btn {
+	display: flex;
+	align-items: center;
+}
+
+.menu-btn img {
+	height: 32px;
+	margin-right: 4px;
+}
+
+
+.menu-btn-text {
+	margin-top: 4px;
+}
+
+.close-btn{
+  width: 90%;
+  justify-content: end;
+}
+
+.close-btn img{
+  width: 50px;
+ height: 50px;
+}
+
+.d {
+	border: 3.5px solid black;
+	border-radius: 7px;
+  font-family: "zabras", Arial, Helvetica, sans-serif;
+	letter-spacing: 8px;
+	font-size: 18.5px;
+	padding: 0px 6px;
+	margin-right: 4px;
+}
 
 .d-none{
   display: none;

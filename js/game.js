@@ -2,6 +2,12 @@ let canvas;
 let ctx;
 let world;
 let keyboard = new Keyboard();
+let fullscreenBtn = document.getElementById("fullscreen-btn");
+let settingsBtn = document.getElementById("settings-btn");
+let soundBtn = document.getElementById("sound-btn");
+let isMuted = true
+let backgroundMusic = new Audio("./audio/intro.mp3")
+
 
 /**
  * creates the world
@@ -11,69 +17,121 @@ function init() {
   world = new World(canvas, keyboard);
 }
 
-
 /**
  * sets the start screen
  */
-function showStartScreen(){
-	document.getElementById("container").classList.add("container")
+function showStartScreen() {
+  document.getElementById("container").classList.add("container");
+  makeButtonsVisible();
+  closeSettings();
 }
-
 
 /**
  * removes the start screen and the creates the game
  */
-function removeStartScreen(){
-	levelInit();
+function removeStartScreen() {
+  levelInit();
+  init();
+  document.getElementById("container").classList.add("d-none");
+  document.getElementById("start-game-btn").classList.add("d-none");
+}
 
-	init()
-	document.getElementById("container").classList.add("d-none");
-	document.getElementById("start-game-btn").classList.add("d-none")
+/**
+ * removes the d-none css class and adds the screen-btn class
+ */
+function makeButtonsVisible() {
+  settingsBtn.classList.remove("d-none");
+  soundBtn.classList.remove("d-none");
+  fullscreenBtn.classList.remove("d-none");
+
+  settingsBtn.classList.add("screen-btn");
+  soundBtn.classList.add("screen-btn");
+  fullscreenBtn.classList.add("screen-btn");
+}
+
+/**
+ * mute or unmute background music
+ */
+function toggleMusic() {
+  if (!isMuted) {
+    soundBtn.src = "./img/start_screen_buttons/mute.svg";
+    isMuted = true;
+	backgroundMusic.play();
+	backgroundMusic.loop = true;
+  } else if (isMuted) {
+    soundBtn.src = "./img/start_screen_buttons/mute.svg";
+    isMuted = false;
+	backgroundMusic.pause();
+	backgroundMusic.loop = false;
+  }
+}
+
+/**
+ * show settings
+ */
+function openSettings() {
+	document.getElementById("menu-screen").classList.remove("d-none");
 
 }
 
+/**
+ * close settings
+ */
+function closeSettings(){
+	document.getElementById("menu-screen").classList.add("d-none");
+
+}
+
+/**
+ * toggle fullscreen
+ */
+function toggleFullscreen() {
+	 canvas = document.getElementById('canvas');
+    canvas.requestFullscreen();
+}
+
+
 
 // detecting if a key is pressed
-document.addEventListener('keydown', (e) => {
-	if (e.keyCode == 39) {
-		keyboard.RIGHT = true;
-	}
-	if (e.keyCode == 37) {
-		keyboard.LEFT = true;
-	}
-	if (e.keyCode == 38) {
-		keyboard.UP = true;
-	}
-	if (e.keyCode == 40) {
-		keyboard.DOWN = true;
-	}
-	if (e.keyCode == 32) {
-		keyboard.SPACE = true;
-	}
-	if (e.keyCode == 68) {
-		keyboard.D = true;
-	}
+document.addEventListener("keydown", (e) => {
+  if (e.keyCode == 39) {
+    keyboard.RIGHT = true;
+  }
+  if (e.keyCode == 37) {
+    keyboard.LEFT = true;
+  }
+  if (e.keyCode == 38) {
+    keyboard.UP = true;
+  }
+  if (e.keyCode == 40) {
+    keyboard.DOWN = true;
+  }
+  if (e.keyCode == 32) {
+    keyboard.SPACE = true;
+  }
+  if (e.keyCode == 68) {
+    keyboard.D = true;
+  }
 });
 
-
 // detecting if a key is released
-document.addEventListener('keyup', (e) => {
-	if (e.keyCode == 39) {
-		keyboard.RIGHT = false;
-	}
-	if (e.keyCode == 37) {
-		keyboard.LEFT = false;
-	}
-	if (e.keyCode == 38) {
-		keyboard.UP = false;
-	}
-	if (e.keyCode == 40) {
-		keyboard.DOWN = false;
-	}
-	if (e.keyCode == 32) {
-		keyboard.SPACE = false;
-	}
-	if (e.keyCode == 68) {
-		keyboard.D = false;
-	}
+document.addEventListener("keyup", (e) => {
+  if (e.keyCode == 39) {
+    keyboard.RIGHT = false;
+  }
+  if (e.keyCode == 37) {
+    keyboard.LEFT = false;
+  }
+  if (e.keyCode == 38) {
+    keyboard.UP = false;
+  }
+  if (e.keyCode == 40) {
+    keyboard.DOWN = false;
+  }
+  if (e.keyCode == 32) {
+    keyboard.SPACE = false;
+  }
+  if (e.keyCode == 68) {
+    keyboard.D = false;
+  }
 });
