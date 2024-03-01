@@ -26,6 +26,24 @@ function showStartScreen() {
   closeSettings();
 }
 
+
+/**
+ * this functions displays the loss
+ */
+function displayLose() {
+    document.getElementById('game-over').classList.remove('d-none');
+	document.getElementById("replay-game-btn").classList.remove("d-none");
+
+}
+
+/**
+ * this function displays the win
+ */
+function displayWin() {
+	document.getElementById("container").classList.remove("d-none");
+	document.getElementById("start-game-btn").classList.remove("d-none");
+}
+
 /**
  * removes the start screen and the creates the game
  */
@@ -34,6 +52,14 @@ function removeStartScreen() {
   init();
   document.getElementById("container").classList.add("d-none");
   document.getElementById("start-game-btn").classList.add("d-none");
+}
+
+function removeGameOverScreen(){
+	levelInit();
+	init();
+	document.getElementById("game-over").classList.add("d-none");
+	document.getElementById("replay-game-btn").classList.add("d-none");
+
 }
 
 /**
@@ -53,14 +79,14 @@ function makeButtonsVisible() {
  * mute or unmute background music
  */
 function toggleMusic() {
-  if (!isMuted) {
-    soundBtn.src = "./img/start_screen_buttons/mute.svg";
-    isMuted = true;
+  if (isMuted) {
+    soundBtn.src = "./img/start_screen_buttons/unmute.svg";
+    isMuted = false;
 	backgroundMusic.play();
 	backgroundMusic.loop = true;
-  } else if (isMuted) {
+  } else if (!isMuted) {
     soundBtn.src = "./img/start_screen_buttons/mute.svg";
-    isMuted = false;
+    isMuted = true;
 	backgroundMusic.pause();
 	backgroundMusic.loop = false;
   }

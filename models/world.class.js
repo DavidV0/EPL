@@ -8,6 +8,7 @@ class World {
   statusBar = new StatusBar();
   coinStatusBar = new CoinStatusBar();
   bottelStatusBar = new BottleStatusBar();
+  endbossStatusBar = new EndBossbar()
   throwableObjects = [];
 
 
@@ -146,6 +147,7 @@ class World {
     this.addToMap(this.statusBar);
     this.addToMap(this.coinStatusBar);
     this.addToMap(this.bottelStatusBar);
+    this.addToMap(this.endbossStatusBar);
 
     this.ctx.translate(this.camera_x, 0); // set Camera pos forward
 

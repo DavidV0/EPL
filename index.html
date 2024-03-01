@@ -21,7 +21,7 @@
     <script src="./models/coin-status-bar.class.js"></script>
     <script src="./models/coin.class.js"></script>
     <script src="./models/bottle.class.js"></script>
-
+    <script src="./models/endboss-status-bar.class.js"></script>
     <script src="./models/bottle-status-bar.class.js"></script>
     <script src="./models/status-bar.class.js"></script>
     <script src="./models/background-object.class.js"></script>
@@ -70,8 +70,13 @@
       />
     </div>
     <div class="menu-screen d-none" id="menu-screen">
-      <div class="menu-btn close-btn" >
-        <img src="./img/start_screen_buttons/close.svg" alt="" id="close-btn" onclick="closeSettings()">
+      <div class="menu-btn close-btn">
+        <img
+          src="./img/start_screen_buttons/close.svg"
+          alt=""
+          id="close-btn"
+          onclick="closeSettings()"
+        />
       </div>
       <div class="menu-description">
         <div class="menu-btn">
@@ -91,7 +96,16 @@
           <span class="menu-btn-text">THROW BOTTLE</span>
         </div>
       </div>
-     
+    </div>
+
+    <div class="game-over-screen d-none" id="game-over">
+      <button
+        onclick="removeGameOverScreen()"
+        id="replay-game-btn"
+        class="start-game-btn d-none"
+      >
+        Replay!
+      </button>
     </div>
   </body>
 </html>
