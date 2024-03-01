@@ -1,6 +1,7 @@
 class World {
   character = new Character();
   level = level1;
+  endboss = this.level.endboss;
   ctx;
   canvas;
   keyboard;
@@ -11,8 +12,10 @@ class World {
   endbossStatusBar = new EndBossbar();
   throwableObjects = [];
 
-  coinSound = new Audio("./audio/coin.mp3")
-  pickUpSound = new Audio("./audio/pick.mp3")
+  coinSound = new Audio("./audio/coin.mp3");
+  pickUpSound = new Audio("./audio/pick.mp3");
+  glasSound = new Audio("./audio/glas.mp3");
+  deadBossSound = new Audio("./audio/dead_boss.mp3");
 
   constructor(canvas, keyboard) {
     this.canvas = canvas;
@@ -31,6 +34,7 @@ class World {
     this.character.energy = 100;
     this.character.coins = 20;
     this.character.bottles = 20;
+    this.endboss.world = this;
   }
 
   /**
@@ -50,7 +54,9 @@ class World {
       this.checkCollisions();
       this.checkThrowObjects();
       this.checkCollisionsWithCoins();
-     this.checkCollisionsWithBottles();
+      this.checkCollisionsWithBottles();
+      this.checkCollisionsWithEndboss();
+      this.checkCollisionsWithEndbossBottle();
     }, 100);
   }
 
@@ -65,7 +71,7 @@ class World {
       );
       this.throwableObjects.push(bottle);
       this.character.bottles -= 20;
-      this.bottelStatusBar.setPercentage(-20)
+      this.bottelStatusBar.setPercentage(-20);
     }
   }
 
@@ -76,31 +82,70 @@ class World {
     setInterval(() => {
       this.level.enemies.forEach((enemy) => {
         if (!enemy.dead && this.character.isColliding(enemy)) {
-          if (enemy instanceof Chicken && this.character.y + this.character.height > 60 && !this.character.isHurt() && this.character.isAboveGround()  && enemy.killAble) {
-              this.character.jump();
-              this.kill(enemy);
+          if (
+            enemy instanceof Chicken &&
+            this.character.y + this.character.height > 60 &&
+            !this.character.isHurt() &&
+            this.character.isAboveGround() &&
+            enemy.killAble
+          ) {
+            this.character.jump();
+            this.kill(enemy);
           } else if (this.character.isColliding(enemy)) {
-          this.character.hit();
-          this.statusBar.setPercentage(this.character.energy);
+            this.character.hit();
+            this.statusBar.setPercentage(this.character.energy);
+          }
         }
-    }});
+      });
     }, 400);
   }
 
-   /**
-     * kills enemy
-     * @param {class} enemy - movable object
-     */
-   kill(enemy) {
-    enemy.killChicken();
+  /**
+   * kills enemy
+   * @param {class} enemy - movable object
+   */
+  kill(enemy) {
+    if (enemy instanceof Chicken) {
+      enemy.killChicken();
+    }
 
     setTimeout(() => {
-    this.level.enemies.splice(this.level.enemies.indexOf(enemy),1);
-
+      this.level.enemies.splice(this.level.enemies.indexOf(enemy), 1);
     }, 300);
+  }
 
-    
-}
+  /**
+   * checks if the bottle hits the endboss
+   */
+  checkCollisionsWithEndbossBottle() {
+    this.level.endboss.forEach((boss) => {
+      this.throwableObjects.forEach((bottle) => {
+        if (boss.isColliding(bottle)) {
+          this.glasSound.play();
+          this.throwableObjects.pop();
+          boss.energy -= 30;
+          this.endbossStatusBar.setPercentage(boss.energy);
+        }
+        if (boss.energy <= 0) {
+          this.deadBossSound.play();
+          this.kill(boss);
+        }
+      });
+    });
+  }
+
+  /**
+   * checks the if the characters gets hit by the endboss
+   */
+  checkCollisionsWithEndboss() {
+    this.level.endboss.forEach((boss) => {
+      if (!boss.isDead && this.character.isColliding(boss)) {
+        this.character.hitSound.play();
+        this.character.hit();
+        this.statusBar.setPercentage(this.character.energy);
+      }
+    });
+  }
 
   /**
    * checks collision with bottles on ground
@@ -110,7 +155,7 @@ class World {
       if (this.character.isColliding(bottle)) {
         this.character.bottles += 20;
         this.pickUpSound.play();
-        if(this.character.bottles === 100){
+        if (this.character.bottles === 100) {
           this.character.bottles = 100;
         }
 
@@ -155,7 +200,6 @@ class World {
       this.flipImage(obj);
     }
     obj.draw(this.ctx);
-    
 
     if (obj.otherDirection) {
       this.flipImageBack(obj);
@@ -193,7 +237,7 @@ class World {
     this.addObjectsToMap(this.level.backgroundObjects);
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.enemies);
-    this.addObjectsToMap(this.level.endboss)
+    this.addObjectsToMap(this.level.endboss);
     this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.level.coins);
     this.addObjectsToMap(this.level.bottles);
