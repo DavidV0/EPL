@@ -13,6 +13,4 @@ class Coin extends DrawAbleObject {
     this.y = 150 + Math.random() * 200;
   
   }
-
- 
 }

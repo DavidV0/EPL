@@ -6,7 +6,10 @@ let fullscreenBtn = document.getElementById("fullscreen-btn");
 let settingsBtn = document.getElementById("settings-btn");
 let soundBtn = document.getElementById("sound-btn");
 let isMuted = true
+
+
 let backgroundMusic = new Audio("./audio/intro.mp3")
+let winSound = new Audio("./audio/win.mp3")
 
 
 /**
@@ -42,6 +45,7 @@ function displayLose() {
 function displayWin() {
 	document.getElementById("container").classList.remove("d-none");
 	document.getElementById("start-game-btn").classList.remove("d-none");
+	winSound.play();
 }
 
 /**

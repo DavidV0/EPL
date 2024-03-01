@@ -8,6 +8,12 @@ class Character extends MoveableObject {
   coins = 0;
   bottles = 0;
   hasLost = false;
+   offset = {
+        top: 120,
+        left: 40,
+        right: 30,
+        bottom: 30
+    };
   IMAGES_WALKING = [
     "./img/2_character_pepe/2_walk/W-21.png",
     "./img/2_character_pepe/2_walk/W-22.png",
