@@ -77,7 +77,8 @@ class Character extends MoveableObject {
     "./img/2_character_pepe/1_idle/long_idle/I-20.png",
   ];
 
-  walking_sound = new Audio("./audio/walking.mp3");
+  walkingSound = new Audio("./audio/walking.mp3");
+  hitSound = new Audio("./audio/hit.mp3")
 
   constructor() {
     super().loadImage("../img/2_character_pepe/2_walk/W-21.png");
@@ -94,19 +95,19 @@ class Character extends MoveableObject {
 
   animate() {
     setInterval(() => {
-      this.walking_sound.pause();
+      this.walkingSound.pause();
 
       //lässt den Character nach links laufen
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
         this.moveRight();
-        this.walking_sound.play();
+        this.walkingSound.play();
         this.otherDirection = false;
       }
 
       //lässt den Character nach rechts laufen
       if (this.world.keyboard.LEFT && this.x > 0) {
         this.moveLeft();
-        this.walking_sound.play();
+        this.walkingSound.play();
         this.otherDirection = true;
       }
 
@@ -130,6 +131,7 @@ class Character extends MoveableObject {
       } else if (this.isAboveGround()) {
         this.playAnimation(this.IMAGES_JUMPING);
       } else if (this.isHurt()) {
+        this.hitSound.play();
         this.playAnimation(this.IMAGES_HURT);
       } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
         //Walk animation

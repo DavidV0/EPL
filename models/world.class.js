@@ -58,12 +58,14 @@ class World {
    * checks if the button is clicked to throw the bottles
    */
   checkThrowObjects() {
-    if (this.keyboard.D) {
+    if (this.keyboard.D && this.character.bottles > 20) {
       let bottle = new ThrowableObject(
         this.character.x + 50,
         this.character.y + 50
       );
       this.throwableObjects.push(bottle);
+      this.character.bottles -= 20;
+      this.bottelStatusBar.setPercentage(-20)
     }
   }
 
@@ -91,7 +93,6 @@ class World {
      */
    kill(enemy) {
     enemy.killChicken();
-    console.log(this.level.enemies.indexOf(enemy))
 
     setTimeout(() => {
     this.level.enemies.splice(this.level.enemies.indexOf(enemy),1);
