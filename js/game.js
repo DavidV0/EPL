@@ -55,10 +55,11 @@ function removeStartScreen() {
 }
 
 function removeGameOverScreen(){
-	levelInit();
-	init();
+
 	document.getElementById("game-over").classList.add("d-none");
 	document.getElementById("replay-game-btn").classList.add("d-none");
+	levelInit();
+	init();
 
 }
 

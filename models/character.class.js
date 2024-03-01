@@ -5,6 +5,9 @@ class Character extends MoveableObject {
   y = 150;
   world;
   speed = 10;
+  coins = 0;
+  bottles = 0;
+  hasLost = false;
   IMAGES_WALKING = [
     "./img/2_character_pepe/2_walk/W-21.png",
     "./img/2_character_pepe/2_walk/W-22.png",
@@ -84,16 +87,23 @@ class Character extends MoveableObject {
     setInterval(() => {
       if (this.isDead()) {
         this.playAnimation(this.IMAGES_DEAD);
-      }else if (this.isAboveGround()) {
+        if(!this.hasLost){
+          setTimeout(()=>{
+            this.hasLost = true;
+            // play lose sound
+            displayLose();
+          },1000)
+        
+
+
+        }
+      } else if (this.isAboveGround()) {
         this.playAnimation(this.IMAGES_JUMPING);
-      } else if(this.isHurt()){
+      } else if (this.isHurt()) {
         this.playAnimation(this.IMAGES_HURT);
       }
 
-      if (
-        (this.world.keyboard.RIGHT && !this.isAboveGround()) ||
-        (this.world.keyboard.LEFT && !this.isAboveGround())
-      ) {
+      if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
         //Walk animation
         this.playAnimation(this.IMAGES_WALKING);
       }

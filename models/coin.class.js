@@ -1,11 +1,11 @@
 class Coin extends DrawAbleObject {
-    width = 75;
-    height = 75;
+    width = 65;
+    height = 65;
     offset = {
-        left: 12,
+        left: 10,
         right: 15,
-        top: 18,
-        bottom: 12
+        top: 20,
+        bottom: 10
     }
   constructor() {
     super().loadImage("./img/7_statusbars/3_icons/icon_coin.png");

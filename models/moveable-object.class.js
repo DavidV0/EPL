@@ -12,6 +12,7 @@ class MoveableObject extends DrawAbleObject {
   otherDirection = false;
   energy = 100;
   lastHit = 0;
+  
  
 
   

@@ -8,9 +8,8 @@ class World {
   statusBar = new StatusBar();
   coinStatusBar = new CoinStatusBar();
   bottelStatusBar = new BottleStatusBar();
-  endbossStatusBar = new EndBossbar()
+  endbossStatusBar = new EndBossbar();
   throwableObjects = [];
-
 
   constructor(canvas, keyboard) {
     this.canvas = canvas;
@@ -21,14 +20,14 @@ class World {
     this.startGame();
   }
 
-
-
-
   /**
    * config our character with all the world objects
    */
   setWorld() {
     this.character.world = this;
+    this.character.energy = 100;
+    this.character.coins = 0;
+    this.character.bottles = 0;
   }
 
   /**
@@ -47,7 +46,8 @@ class World {
     setInterval(() => {
       this.checkCollisions();
       this.checkThrowObjects();
-    }, 200);
+      this.checkCollisionsWithCoins();
+    }, 500);
   }
 
   /**
@@ -74,7 +74,21 @@ class World {
           this.statusBar.setPercentage(this.character.energy);
         }
       });
-    }, 200);
+    }, 400);
+  }
+
+  /**
+   * checks collision with coins
+   */
+  checkCollisionsWithCoins() {
+    this.level.coins.forEach((coin) => {
+      if (this.character.isColliding(coin)) {
+        this.character.coins += 20;
+        this.coinStatusBar.setPercentage(this.character.coins);
+        this.level.coins.splice(this.level.coins.indexOf(coin), 1);
+        console.log("+ 20");
+      }
+    });
   }
 
   /**
@@ -159,6 +173,4 @@ class World {
       self.draw();
     });
   }
-
-  
 }

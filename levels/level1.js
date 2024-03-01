@@ -73,10 +73,6 @@ function levelInit() {
       new Coin(),
       new Coin(),
       new Coin(),
-      new Coin(),
-      new Coin(),
-      new Coin(),
-      new Coin(),
     ],
     [
       new Bottle(),
