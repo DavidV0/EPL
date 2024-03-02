@@ -116,6 +116,7 @@ h1 {
 .screen-btn{
   height: 30px;
   width:  30px;
+  cursor: pointer;
 }
 .screen-btn:hover{
   transform: scale(1.2);
@@ -162,6 +163,8 @@ h1 {
 .close-btn{
   width: 90%;
   justify-content: end;
+  cursor: pointer;
+
 }
 
 .close-btn img{
@@ -177,6 +180,32 @@ h1 {
 	font-size: 18.5px;
 	padding: 0px 6px;
 	margin-right: 4px;
+}
+
+.rotate-device {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.9);
+  height: 100%;
+  width: 100%;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.hint {
+  font-size: 60px;
+  color: white;
+	letter-spacing: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-family: "zabras", Arial, Helvetica, sans-serif;
+
 }
 
 .d-none{

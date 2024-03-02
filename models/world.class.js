@@ -35,7 +35,8 @@ class World {
     this.character.coins = 20;
     this.character.bottles = 20;
     this.level.endboss.world = this;
-  }
+    this.level.endboss.animate();
+  } 
 
   /**
    * starts the game loop and the drawing
