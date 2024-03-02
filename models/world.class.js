@@ -1,7 +1,6 @@
 class World {
   character = new Character();
   level = level1;
-  endboss = this.level.endboss;
   ctx;
   canvas;
   keyboard;
@@ -10,6 +9,7 @@ class World {
   coinStatusBar = new CoinStatusBar();
   bottelStatusBar = new BottleStatusBar();
   endbossStatusBar = new EndBossbar();
+  spawnEndbossStatusBar = false;
   throwableObjects = [];
 
   coinSound = new Audio("./audio/coin.mp3");
@@ -34,7 +34,7 @@ class World {
     this.character.energy = 100;
     this.character.coins = 20;
     this.character.bottles = 20;
-    this.endboss.world = this;
+    this.level.endboss.world = this;
   }
 
   /**
@@ -124,10 +124,12 @@ class World {
           this.glasSound.play();
           this.throwableObjects.pop();
           boss.energy -= 30;
+          this.level.endboss.playAnimation(IMAGES_HURT);
           this.endbossStatusBar.setPercentage(boss.energy);
         }
         if (boss.energy <= 0) {
           this.deadBossSound.play();
+          boss.alive = false;
           this.kill(boss);
         }
       });
@@ -249,7 +251,10 @@ class World {
     this.addToMap(this.statusBar);
     this.addToMap(this.coinStatusBar);
     this.addToMap(this.bottelStatusBar);
-    this.addToMap(this.endbossStatusBar);
+
+    if (this.spawnEndbossStatusBar) {
+      this.addToMap(this.endbossStatusBar);
+    }
 
     this.ctx.translate(this.camera_x, 0); // set Camera pos forward
 
