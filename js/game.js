@@ -8,6 +8,7 @@ let soundBtn = document.getElementById("sound-btn");
 let isMuted = true;
 
 let backgroundMusic = new Audio("./audio/intro.mp3");
+backgroundMusic.volume = 0.4
 let winSound = new Audio("./audio/win.mp3");
 let gameOverSound = new Audio("./audio/gameOver.mp3");
 

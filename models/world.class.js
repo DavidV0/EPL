@@ -25,7 +25,6 @@ class World {
     this.keyboard = keyboard;
     this.setWorld();
     this.startGame();
-    this.checkSounds();
   }
 
 
@@ -97,6 +96,7 @@ class World {
       this.checkCollisionsWithBottles();
       this.checkCollisionsWithEndboss();
       this.checkCollisionsWithEndbossBottle();
+      this.checkSounds();
     }, 100);
   }
 
