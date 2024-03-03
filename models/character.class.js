@@ -78,7 +78,7 @@ class Character extends MoveableObject {
   ];
 
   walkingSound = new Audio("./audio/walking.mp3");
-  hitSound = new Audio("./audio/hit.mp3")
+  hitSound = new Audio("./audio/hit.mp3");
 
   constructor() {
     super().loadImage("../img/2_character_pepe/2_walk/W-21.png");
@@ -92,6 +92,21 @@ class Character extends MoveableObject {
     this.applyGravity();
     this.animate();
   }
+    /**
+   * mutes the sounds in the character class
+   */
+    muteSounds() {
+      this.walkingSound.muted = true;
+      this.hitSound.muted = true;
+    }
+  
+    /**
+     * unmutes the sounds in the character class
+     */
+    unmuteSounds() {
+      this.walkingSound.muted = false;
+      this.hitSound.muted = false;
+    }
 
   animate() {
     setInterval(() => {
@@ -161,4 +176,6 @@ class Character extends MoveableObject {
       }
     }, 1000);
   }
+
+
 }

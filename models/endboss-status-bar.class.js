@@ -2,7 +2,7 @@ class EndBossbar extends DrawAbleObject {
 
 
     x = 420;
-    y = 60;
+    y = 40;
     width = 200;
     height =50;
 

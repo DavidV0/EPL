@@ -67,40 +67,49 @@ class Endboss extends MoveableObject {
   animate() {
     let i = 0;
     setInterval(() => {
-      i++
+      i++;
+
       if (this.alive) {
-        if (this.world.character.x > 1500 && this.hadFirstContact === false) {
-          this.spawnBossAnimation();
+        if (this.world.character.x > 1800 && this.hadFirstContact === false) {
           this.hadFirstContact = true;
-        } else if(i > 15){
+
+          this.spawnBossAnimation();
+        } else if (this.hadFirstContact === true && i == 14) {
           this.playAnimation(this.IMAGES_ATTACK);
+          this.speed = 20;
           this.moveLeft();
-        } else  {
+          this.moveLeft();
+          this.moveLeft();
+          this.moveLeft();
+          this.moveLeft();
+        } else if (this.hadFirstContact === true) {
+          i = i % 15;
+          this.speed = 10;
           this.playAnimation(this.IMAGES_WALKING);
           this.moveLeft();
         }
       } else if (!this.alive) {
         this.killedEndboss();
       }
-    }, 1000 / 10);
+    }, 200);
   }
 
   spawnBossAnimation() {
-    this.playAnimation(this.IMAGES_SPAWNING);
+    setTimeout(() => {
+      this.playAnimation(this.IMAGES_SPAWNING);
+    }, 1000);
     this.createBossStatusBar();
-    console.log("wurde ausgeführt");
   }
 
   createBossStatusBar() {
-    this.world.endbossStatusBar = true;
+    this.world.spawnEndbossStatusBar = true;
   }
 
-  killedEndboss(){
-    setTimeout(()=>{
+  killedEndboss() {
+    setTimeout(() => {
       this.playAnimation(this.IMAGES_DEAD);
+    }, 3000);
     displayWin();
-    },1000)
-    
+    clearAllIntervals();
   }
-
 }

@@ -16,6 +16,7 @@ class World {
   pickUpSound = new Audio("./audio/pick.mp3");
   glasSound = new Audio("./audio/glas.mp3");
   deadBossSound = new Audio("./audio/dead_boss.mp3");
+  throwSound = new Audio("./audio/throw.mp3");
 
   constructor(canvas, keyboard) {
     this.canvas = canvas;
@@ -24,6 +25,43 @@ class World {
     this.keyboard = keyboard;
     this.setWorld();
     this.startGame();
+    this.checkSounds();
+  }
+
+
+  /**
+   * checks if sounds are muted or not;
+   */
+  checkSounds(){
+    if(isMuted){
+      this.muteSounds();
+      this.character.muteSounds();
+    }else {
+      this.unmuteSounds();
+      this.character.muteSounds();
+    }
+  }
+
+  /**
+   * mutes the sounds in the World
+   */
+  muteSounds() {
+    this.coinSound.muted = true;
+    this.glasSound.muted = true;
+    this.pickUpSound.muted = true;
+    this.deadBossSound.muted = true;
+    this.throwSound.muted = true;
+  }
+
+  /**
+   * unmutes the sounds in the World
+   */
+  unmuteSounds() {
+    this.coinSound.muted = false;
+    this.glasSound.muted = false;
+    this.pickUpSound.muted = false;
+    this.deadBossSound.muted = false;
+    this.throwSound.muted = false;
   }
 
   /**
@@ -35,9 +73,9 @@ class World {
     this.character.coins = 20;
     this.character.bottles = 20;
     this.level.endboss.world = this;
+    this.level.endboss.hadFirstContact = false;
     this.level.endboss.animate();
-  } 
-
+  }
   /**
    * starts the game loop and the drawing
    */
@@ -45,6 +83,7 @@ class World {
     this.draw();
     this.run();
     closeSettings();
+    
   }
 
   /**
@@ -70,9 +109,10 @@ class World {
         this.character.x + 50,
         this.character.y + 50
       );
+      this.throwSound.play();
       this.throwableObjects.push(bottle);
       this.character.bottles -= 20;
-      this.bottelStatusBar.setPercentage(-20);
+      this.bottelStatusBar.setPercentage(this.character.bottles);
     }
   }
 
@@ -119,21 +159,24 @@ class World {
    * checks if the bottle hits the endboss
    */
   checkCollisionsWithEndbossBottle() {
-    this.level.endboss.forEach((boss) => {
-      this.throwableObjects.forEach((bottle) => {
-        if (boss.isColliding(bottle)) {
-          this.glasSound.play();
-          this.throwableObjects.pop();
-          boss.energy -= 30;
-          this.level.endboss.playAnimation(IMAGES_HURT);
-          this.endbossStatusBar.setPercentage(boss.energy);
-        }
-        if (boss.energy <= 0) {
-          this.deadBossSound.play();
-          boss.alive = false;
-          this.kill(boss);
-        }
-      });
+    this.throwableObjects.forEach((bottle) => {
+      if (this.level.endboss.isColliding(bottle)) {
+        this.glasSound.play();
+        this.throwableObjects.pop();
+        this.level.endboss.energy -= 20;
+        this.endbossStatusBar.setPercentage(this.level.endboss.energy);
+
+        this.deadBossSound.play();
+
+        setTimeout(() => {
+          this.level.endboss.playAnimation(this.level.endboss.IMAGES_HURT);
+        }, 1000);
+      }
+      if (this.level.endboss.energy <= 0) {
+        this.deadBossSound.play();
+        this.level.endboss.alive = false;
+        this.kill(this.level.endboss);
+      }
     });
   }
 
@@ -141,13 +184,14 @@ class World {
    * checks the if the characters gets hit by the endboss
    */
   checkCollisionsWithEndboss() {
-    this.level.endboss.forEach((boss) => {
-      if (!boss.isDead && this.character.isColliding(boss)) {
-        this.character.hitSound.play();
-        this.character.hit();
-        this.statusBar.setPercentage(this.character.energy);
-      }
-    });
+    if (
+      this.level.endboss.alive &&
+      this.character.isColliding(this.level.endboss)
+    ) {
+      this.character.hitSound.play();
+      this.character.hit();
+      this.statusBar.setPercentage(this.character.energy);
+    }
   }
 
   /**
@@ -157,12 +201,13 @@ class World {
     this.level.bottles.forEach((bottle) => {
       if (this.character.isColliding(bottle)) {
         this.character.bottles += 20;
+        this.bottelStatusBar.setPercentage(this.character.bottles);
+
         this.pickUpSound.play();
-        if (this.character.bottles === 100) {
+        if (this.character.bottles ==100) {
           this.character.bottles = 100;
         }
 
-        this.bottelStatusBar.setPercentage(this.character.bottles);
         this.level.bottles.splice(this.level.bottles.indexOf(bottle), 1);
       }
     });
@@ -240,7 +285,7 @@ class World {
     this.addObjectsToMap(this.level.backgroundObjects);
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.enemies);
-    this.addObjectsToMap(this.level.endboss);
+    this.addToMap(this.level.endboss);
     this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.level.coins);
     this.addObjectsToMap(this.level.bottles);
