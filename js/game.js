@@ -6,9 +6,10 @@ let fullscreenBtn = document.getElementById("fullscreen-btn");
 let settingsBtn = document.getElementById("settings-btn");
 let soundBtn = document.getElementById("sound-btn");
 let isMuted = true;
+let isFullscreen = false;
 
 let backgroundMusic = new Audio("./audio/intro.mp3");
-backgroundMusic.volume = 0.05
+backgroundMusic.volume = 0.05;
 let winSound = new Audio("./audio/win.mp3");
 let gameOverSound = new Audio("./audio/gameOver.mp3");
 
@@ -38,8 +39,6 @@ function displayLose() {
   gameOverSound.loop = false;
   gameOverSound.play();
   clearAllIntervals();
-
-
 }
 
 /**
@@ -48,29 +47,27 @@ function displayLose() {
 function displayWin() {
   document.getElementById("container").classList.remove("d-none");
   document.getElementById("start-game-btn").classList.remove("d-none");
-  canvas.style.display = "none"
+  canvas.style.display = "none";
   winSound.loop = false;
   winSound.play();
   clearAllIntervals();
-
 }
 
 /**
  * removes the start screen and the creates the game
  */
 function removeStartScreen() {
-  
-	clearAllIntervals();
+  clearAllIntervals();
 
   levelInit();
   init();
-  canvas.style.display= "block"
+  canvas.style.display = "block";
   document.getElementById("container").classList.add("d-none");
   document.getElementById("start-game-btn").classList.add("d-none");
 }
 
 function removeGameOverScreen() {
-	clearAllIntervals();
+  clearAllIntervals();
 
   levelInit();
   init();
@@ -130,8 +127,39 @@ function closeSettings() {
  * toggle fullscreen
  */
 function toggleFullscreen() {
-  canvas = document.getElementById("canvas");
-  canvas.requestFullscreen();
+  if (!isFullscreen) {
+    isFullscreen = true;
+
+    canvas = document.getElementById("canvas");
+    canvas.classList.add("fullscreen");
+
+
+    canvas.requestFullscreen();
+    document.getElementById("container").classList.add("container-fullscreen");
+
+  } else {
+    isFullscreen = false;
+    canvas = document.getElementById("canvas");
+    canvas.classList.remove("fullscreen");
+
+    if (
+      document.fullscreenElement ||
+      document.webkitFullscreenElement ||
+      document.mozFullScreenElement ||
+      document.msFullscreenElement
+    ) {
+      // Exit fullscreen
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+      }
+    }
+  }
 }
 
 /* Alternative (quick and dirty), um alle Intervalle zu beenden. */

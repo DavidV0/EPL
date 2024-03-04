@@ -1,6 +1,7 @@
 canvas {
   display: block;
   border-radius: 4px;
+  aspect-ratio: auto 720/480;
 }
 
 body {
@@ -27,6 +28,13 @@ h1 {
   transform: skew(-20deg) scale(1);
   margin-top: -100px;
 }
+.fullscreen{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
 
 .container {
   margin: 0;
@@ -41,6 +49,13 @@ h1 {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+}
+
+.container-fullscreen {
+  align-items: center;
+  flex-direction: column;
+  background-position: start;
+
 }
 
 .game-over-screen {
@@ -184,6 +199,8 @@ h1 {
   flex-direction: column;
   font-family: "zabras", Arial, Helvetica, sans-serif;
 }
+
+
 
 /* Smartphones ----------*/
 @media (orientation: portrait) {
