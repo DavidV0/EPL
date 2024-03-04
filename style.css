@@ -215,6 +215,28 @@ h1 {
   }
 }
 
+@media only screen and (min-width: 500px) {
+  .rotate-device{
+    display: none;
+  }
+
+
+  
+
+}
+@media only screen and (max-width: 500px) {
+ 
+  .start-game-btn{
+    display: none;
+  }
+
+}
+
+
+
+
+
+
 @media only screen and (max-width: 720px) {
   canvas {
     width: 100%;
@@ -222,6 +244,27 @@ h1 {
   .container {
     display: flex;
     width: 100%;
+    background-size: contain;
+  }
+
+  .start-game-btn{
+    position: absolute;
+    margin: 0;
+    top: 15%;
+    font-size: 28px;
+    width: 180px;
+    height: 36px;
+  }
+
+  .screen-btn-container{
+    margin: 0;
+    top: 35%;
+    left: 85%;
+  }
+
+  .screen-btn{
+    width: 20px;
+    height: 20px;
   }
 
   .rotate-device {
@@ -229,7 +272,17 @@ h1 {
   }
 }
 
-/* Smartphones ----------*/
+
+@media only screen and (max-width: 615px) {
+ 
+  .start-game-btn{
+    top: 25%;
+
+  }
+
+}
+
+
 
 @media only screen and (max-height: 480px) {
   canvas {
