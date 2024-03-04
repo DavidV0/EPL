@@ -9,7 +9,7 @@ class Character extends MoveableObject {
   bottles = 0;
   hasLost = false;
   offset = {
-    top: 120,
+    top: 70,
     left: 40,
     right: 30,
     bottom: 30,
@@ -152,7 +152,7 @@ class Character extends MoveableObject {
         //Walk animation
         this.playAnimation(this.IMAGES_WALKING);
       }
-    }, 1000 / 15);
+    },50);
 
     //check for idle
     let i;

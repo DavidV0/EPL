@@ -27,15 +27,14 @@ class World {
     this.startGame();
   }
 
-
   /**
    * checks if sounds are muted or not;
    */
-  checkSounds(){
-    if(isMuted){
+  checkSounds() {
+    if (isMuted) {
       this.muteSounds();
       this.character.muteSounds();
-    }else {
+    } else {
       this.unmuteSounds();
       this.character.muteSounds();
     }
@@ -82,7 +81,6 @@ class World {
     this.draw();
     this.run();
     closeSettings();
-    
   }
 
   /**
@@ -97,7 +95,7 @@ class World {
       this.checkCollisionsWithEndboss();
       this.checkCollisionsWithEndbossBottle();
       this.checkSounds();
-    }, 100);
+    }, 200);
   }
 
   /**
@@ -105,14 +103,20 @@ class World {
    */
   checkThrowObjects() {
     if (this.keyboard.D && this.character.bottles > 20) {
+      this.keyboard.D = false;
+
       let bottle = new ThrowableObject(
-        this.character.x + 50,
-        this.character.y + 50
+        this.character.x + 75,
+        this.character.y + 75
       );
       this.throwSound.play();
       this.throwableObjects.push(bottle);
       this.character.bottles -= 20;
       this.bottelStatusBar.setPercentage(this.character.bottles);
+      setTimeout(()=>{
+      this.keyboard.D = false;
+
+      }, 1000)
     }
   }
 
@@ -120,25 +124,23 @@ class World {
    * checks if the character is colliding with an enemy
    */
   checkCollisions() {
-    setInterval(() => {
-      this.level.enemies.forEach((enemy) => {
-        if (!enemy.dead && this.character.isColliding(enemy)) {
-          if (
-            enemy instanceof Chicken &&
-            this.character.y + this.character.height > 60 &&
-            !this.character.isHurt() &&
-            this.character.isAboveGround() &&
-            enemy.killAble
-          ) {
-            this.character.jump();
-            this.kill(enemy);
-          } else if (this.character.isColliding(enemy)) {
-            this.character.hit();
-            this.statusBar.setPercentage(this.character.energy);
-          }
+    this.level.enemies.forEach((enemy) => {
+      if (enemy.alive && this.character.isColliding(enemy)) {
+        if (
+          enemy instanceof Chicken &&
+          this.character.y + this.character.height > 70&&
+          !this.character.isHurt() &&
+          this.character.isAboveGround() &&
+          enemy.killAble
+        ) {
+          this.character.jump();
+          this.kill(enemy);
+        } else {
+          this.character.hit();
+          this.statusBar.setPercentage(this.character.energy);
         }
-      });
-    }, 400);
+      }
+    });
   }
 
   /**
@@ -165,6 +167,7 @@ class World {
         this.throwableObjects.pop();
         this.level.endboss.energy -= 20;
         this.endbossStatusBar.setPercentage(this.level.endboss.energy);
+        bottle.animate();
 
         this.deadBossSound.play();
 
@@ -199,16 +202,18 @@ class World {
    */
   checkCollisionsWithBottles() {
     this.level.bottles.forEach((bottle) => {
-      if (this.character.isColliding(bottle)) {
-        this.character.bottles += 20;
-        this.bottelStatusBar.setPercentage(this.character.bottles);
+      if (this.character.bottles < 100) {
+        if (this.character.isColliding(bottle)) {
+          this.character.bottles += 20;
+          this.bottelStatusBar.setPercentage(this.character.bottles);
 
-        this.pickUpSound.play();
-        if (this.character.bottles ==100) {
-          this.character.bottles = 100;
+          this.pickUpSound.play();
+          if (this.character.bottles == 100) {
+            this.character.bottles = 100;
+          }
+
+          this.level.bottles.splice(this.level.bottles.indexOf(bottle), 1);
         }
-
-        this.level.bottles.splice(this.level.bottles.indexOf(bottle), 1);
       }
     });
   }

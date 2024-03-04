@@ -8,7 +8,7 @@ let soundBtn = document.getElementById("sound-btn");
 let isMuted = true;
 
 let backgroundMusic = new Audio("./audio/intro.mp3");
-backgroundMusic.volume = 0.4
+backgroundMusic.volume = 0.05
 let winSound = new Audio("./audio/win.mp3");
 let gameOverSound = new Audio("./audio/gameOver.mp3");
 
@@ -88,14 +88,14 @@ function makeButtonsVisible() {
  */
 function toggleMusic() {
   if (isMuted) {
-    soundBtn.src = "./img/start_screen_buttons/unmute.svg";
+    soundBtn.src = "./img/start_screen_buttons/mute.svg";
     isMuted = false;
     backgroundMusic.play();
     backgroundMusic.loop = true;
     winSound.mute = true;
     gameOverSound.mute = true;
   } else if (!isMuted) {
-    soundBtn.src = "./img/start_screen_buttons/mute.svg";
+    soundBtn.src = "./img/start_screen_buttons/unmute.svg";
     isMuted = true;
     backgroundMusic.pause();
     backgroundMusic.loop = false;

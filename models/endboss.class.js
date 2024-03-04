@@ -7,17 +7,19 @@ class Endboss extends MoveableObject {
   speed = 10;
   energy = 100;
   alive = true;
+  offset = {
+    top: 0,
+    left: 50,
+    right: 30,
+    bottom: 10,
+};
 
   IMAGES_WALKING = [
-    "./img/4_enemie_boss_chicken/2_alert/G5.png",
-    "./img/4_enemie_boss_chicken/2_alert/G6.png",
-    "./img/4_enemie_boss_chicken/2_alert/G7.png",
-    "./img/4_enemie_boss_chicken/2_alert/G8.png",
-    "./img/4_enemie_boss_chicken/2_alert/G9.png",
-    "./img/4_enemie_boss_chicken/2_alert/G10.png",
-    "./img/4_enemie_boss_chicken/2_alert/G11.png",
-    "./img/4_enemie_boss_chicken/2_alert/G12.png",
-    "./img/4_enemie_boss_chicken/2_alert/G5.png",
+    "./img/4_enemie_boss_chicken/1_walk/G1.png",
+    "./img/4_enemie_boss_chicken/1_walk/G2.png",
+    "./img/4_enemie_boss_chicken/1_walk/G3.png",
+    "./img/4_enemie_boss_chicken/1_walk/G4.png",
+    
   ];
 
   IMAGES_SPAWNING = [
@@ -71,33 +73,32 @@ class Endboss extends MoveableObject {
 
       if (this.alive) {
         if (this.world.character.x > 1800 && this.hadFirstContact === false) {
-          this.hadFirstContact = true;
-
           this.spawnBossAnimation();
         } else if (this.hadFirstContact === true && i == 14) {
-          this.playAnimation(this.IMAGES_ATTACK);
           this.speed = 20;
+          this.playAnimation(this.IMAGES_ATTACK);
           this.moveLeft();
           this.moveLeft();
           this.moveLeft();
-          this.moveLeft();
-          this.moveLeft();
+
+
+          
+        
         } else if (this.hadFirstContact === true) {
           i = i % 15;
-          this.speed = 10;
+          this.speed = 15;
           this.playAnimation(this.IMAGES_WALKING);
           this.moveLeft();
         }
       } else if (!this.alive) {
         this.killedEndboss();
       }
-    }, 200);
+    }, 100);
   }
 
   spawnBossAnimation() {
-    setTimeout(() => {
-      this.playAnimation(this.IMAGES_SPAWNING);
-    }, 1000);
+    this.playAnimation(this.IMAGES_SPAWNING);
+    this.hadFirstContact = true;
     this.createBossStatusBar();
   }
 
