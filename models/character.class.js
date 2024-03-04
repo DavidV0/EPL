@@ -92,21 +92,21 @@ class Character extends MoveableObject {
     this.applyGravity();
     this.animate();
   }
-    /**
+  /**
    * mutes the sounds in the character class
    */
-    muteSounds() {
-      this.walkingSound.muted = true;
-      this.hitSound.muted = true;
-    }
-  
-    /**
-     * unmutes the sounds in the character class
-     */
-    unmuteSounds() {
-      this.walkingSound.muted = false;
-      this.hitSound.muted = false;
-    }
+  muteSounds() {
+    this.walkingSound.muted = true;
+    this.hitSound.muted = true;
+  }
+
+  /**
+   * unmutes the sounds in the character class
+   */
+  unmuteSounds() {
+    this.walkingSound.muted = false;
+    this.hitSound.muted = false;
+  }
 
   animate() {
     setInterval(() => {
@@ -135,6 +135,7 @@ class Character extends MoveableObject {
     }, 1000 / 60);
 
     setInterval(() => {
+      this.playAnimation(this.IMAGES_IDLE)
       if (this.isDead()) {
         this.playAnimation(this.IMAGES_DEAD);
         if (!this.hasLost) {
@@ -152,7 +153,7 @@ class Character extends MoveableObject {
         //Walk animation
         this.playAnimation(this.IMAGES_WALKING);
       }
-    },50);
+    }, 50);
 
     //check for idle
     let i;
@@ -176,6 +177,4 @@ class Character extends MoveableObject {
       }
     }, 1000);
   }
-
-
 }

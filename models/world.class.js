@@ -11,6 +11,7 @@ class World {
   endbossStatusBar = new EndBossbar();
   spawnEndbossStatusBar = false;
   throwableObjects = [];
+  allowThrow = true;
 
   coinSound = new Audio("./audio/coin.mp3");
   pickUpSound = new Audio("./audio/pick.mp3");
@@ -102,8 +103,8 @@ class World {
    * checks if the button is clicked to throw the bottles
    */
   checkThrowObjects() {
-    if (this.keyboard.D && this.character.bottles > 20) {
-
+    if (this.keyboard.D && this.character.bottles > 20 && this.allowThrow) {
+      this.allowThrow = false;
       let bottle = new ThrowableObject(
         this.character.x + 75,
         this.character.y + 75
@@ -113,9 +114,10 @@ class World {
       this.character.bottles -= 20;
       this.bottelStatusBar.setPercentage(this.character.bottles);
       setTimeout(()=>{
-      this.keyboard.D = false;
 
-      }, 1000)
+      this.allowThrow = true;
+
+      }, 500)
     }
   }
 

@@ -111,6 +111,5 @@ class Endboss extends MoveableObject {
       this.playAnimation(this.IMAGES_DEAD);
     }, 3000);
     displayWin();
-    clearAllIntervals();
   }
 }

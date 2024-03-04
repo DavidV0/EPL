@@ -37,6 +37,9 @@ function displayLose() {
   document.getElementById("replay-game-btn").classList.remove("d-none");
   gameOverSound.loop = false;
   gameOverSound.play();
+  clearAllIntervals();
+
+
 }
 
 /**
@@ -47,6 +50,8 @@ function displayWin() {
   document.getElementById("start-game-btn").classList.remove("d-none");
   winSound.loop = false;
   winSound.play();
+  clearAllIntervals();
+
 }
 
 /**
