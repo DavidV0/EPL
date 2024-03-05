@@ -96,7 +96,7 @@ class World {
       this.checkCollisionsWithEndboss();
       this.checkCollisionsWithEndbossBottle();
       this.checkSounds();
-    }, 100);
+    }, 1000/60);
   }
 
   /**
