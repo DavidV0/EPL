@@ -12,7 +12,6 @@ let backgroundMusic = new Audio("./audio/intro.mp3");
 backgroundMusic.volume = 0.05;
 let winSound = new Audio("./audio/win.mp3");
 let gameOverSound = new Audio("./audio/gameOver.mp3");
-console.log("newest version")
 
 /**
  * creates the world
@@ -128,38 +127,47 @@ function closeSettings() {
  * toggle fullscreen
  */
 function toggleFullscreen() {
+  let element  = document.getElementById("container")
+  let canvas = document.getElementById("canvas")
   if (!isFullscreen) {
     isFullscreen = true;
-
-    canvas = document.getElementById("canvas");
+    element.classList.add("container-fullscreen");
     canvas.classList.add("fullscreen");
+    document.getElementById("screen-btn-container").classList.add("screen-btn-container-fullscreen")
+    document.getElementById("screen-btn-container").classList.remove("screen-btn-container")
 
-
-    canvas.requestFullscreen();
-    document.getElementById("container").classList.add("container-fullscreen");
-
-  } else {
-    isFullscreen = false;
-    canvas = document.getElementById("canvas");
+   enterFullScreen(element);
+  }else if(isFullscreen){
+    element.classList.remove("container-fullscreen");
     canvas.classList.remove("fullscreen");
+    document.getElementById("screen-btn-container").classList.remove("screen-btn-container-fullscreen")
 
-    if (
-      document.fullscreenElement ||
-      document.webkitFullscreenElement ||
-      document.mozFullScreenElement ||
-      document.msFullscreenElement
-    ) {
-      // Exit fullscreen
-      if (document.exitFullscreen) {
-        document.exitFullscreen();
-      } else if (document.mozCancelFullScreen) {
-        document.mozCancelFullScreen();
-      } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen();
-      } else if (document.msExitFullscreen) {
-        document.msExitFullscreen();
-      }
-    }
+    exitFullscreen();
+    isFullscreen = false;
+  }
+
+}
+
+function enterFullScreen(element){
+  if(element.requestFullscreen){
+    element.requestFullscreen();
+  }else if(element.msRequestFullscreen){ // for IE11 (remove June 15, 2022)
+    element.msRequestFullscreen()
+  }else if(element.webkitRequestFullscreen){ // iOS Safari
+    element.webkitRequestFullscreen();
+  }
+}
+
+
+function exitFullscreen(){
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if (document.mozCancelFullScreen) {
+    document.mozCancelFullScreen();
+  } else if (document.webkitExitFullscreen) {
+    document.webkitExitFullscreen();
+  } else if (document.msExitFullscreen) {
+    document.msExitFullscreen();
   }
 }
 
