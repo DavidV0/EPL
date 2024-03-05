@@ -86,6 +86,8 @@ function makeButtonsVisible() {
   settingsBtn.classList.add("screen-btn");
   soundBtn.classList.add("screen-btn");
   fullscreenBtn.classList.add("screen-btn");
+
+  bindBTNPressEvents();
 }
 
 /**
@@ -219,3 +221,45 @@ document.addEventListener("keyup", (e) => {
     keyboard.D = false;
   }
 });
+
+function bindBTNPressEvents(){
+  document.getElementById("btn-left").addEventListener("touchstart", (e)=>{
+    e.preventDefault();
+    keyboard.LEFT = true;
+  });
+
+  document.getElementById("btn-left").addEventListener("touchend", (e)=>{
+    e.preventDefault();
+    keyboard.LEFT = false;
+  });
+
+  document.getElementById("btn-right").addEventListener("touchstart", (e)=>{
+    e.preventDefault();
+    keyboard.RIGHT = true;
+  });
+
+  document.getElementById("btn-right").addEventListener("touchend", (e)=>{
+    e.preventDefault();
+    keyboard.RIGHT = false;
+  });
+  document.getElementById("btn-jump").addEventListener("touchstart", (e)=>{
+    e.preventDefault();
+    keyboard.SPACE = true;
+  });
+
+  document.getElementById("btn-jump").addEventListener("touchend", (e)=>{
+    e.preventDefault();
+    keyboard.SPACE = false;
+  });
+
+  document.getElementById("btn-throw").addEventListener("touchstart", (e)=>{
+    e.preventDefault();
+    keyboard.D = true;
+  });
+
+  document.getElementById("btn-throw").addEventListener("touchend", (e)=>{
+    e.preventDefault();
+    keyboard.D = false;
+  });
+}
+
