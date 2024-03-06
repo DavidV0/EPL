@@ -75,6 +75,17 @@ class Endboss extends MoveableObject {
     this.moveLeft();
     this.moveLeft();
   }
+
+  /**
+   * lets the boss move to the left
+   */
+  bossMoveLeft(){
+    this.speed = 15;
+    this.playAnimation(this.IMAGES_WALKING);
+    this.moveLeft();
+  }
+
+
   animate() {
     let i = 0;
     setInterval(() => {
@@ -86,9 +97,10 @@ class Endboss extends MoveableObject {
           this.bossAttack();
         } else if (this.hadFirstContact === true) {
           i = i % 15;
-          this.speed = 15;
-          this.playAnimation(this.IMAGES_WALKING);
-          this.moveLeft();
+          if(this.world.character.x > (this.x + 180)){
+            this.world.character.energy = 0;
+          }
+          this.bossMoveLeft();
         }
       } else if (!this.alive) {
         this.killedEndboss();
