@@ -7,11 +7,12 @@ class Endboss extends MoveableObject {
   speed = 10;
   energy = 100;
   alive = true;
+
   offset = {
-    top: 0,
-    left: 50,
-    right: 30,
-    bottom: 10,
+    top: 5,
+    left: 20,
+    right: 20,
+    bottom: 5,
   };
 
   IMAGES_WALKING = [
@@ -105,7 +106,7 @@ class Endboss extends MoveableObject {
       } else if (!this.alive) {
         this.killedEndboss();
       }
-    }, 100);
+    }, 1000/10);
   }
 
   /**

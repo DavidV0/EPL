@@ -5,7 +5,7 @@ let level1;
  */
 function levelInit() {
   level1 = new Level(
-    [new Chicken(), new Chicken(), new Chicken(), new Chicken(), new Chicken()],
+    [new Chicken(), new Chicken(), new Chicken(), new Chicken(), new Chicken(), new Duck(), new Duck(), new Duck(), new Duck(), new Duck(),],
     new Endboss(),
     [new Clouds(), new Clouds(), new Clouds()],
     [

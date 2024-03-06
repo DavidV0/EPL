@@ -95,7 +95,7 @@ class World {
       this.checkCollisionsWithEndboss();
       this.checkCollisionsWithEndbossBottle();
       this.checkSounds();
-    }, 1000/30);
+    }, 1000 / 30);
   }
 
   /**
@@ -112,11 +112,9 @@ class World {
       this.throwableObjects.push(bottle);
       this.character.bottles -= 20;
       this.bottelStatusBar.setPercentage(this.character.bottles);
-      setTimeout(()=>{
-
-      this.allowThrow = true;
-
-      }, 1000)
+      setTimeout(() => {
+        this.allowThrow = true;
+      }, 1000);
     }
   }
 
@@ -127,9 +125,8 @@ class World {
     this.level.enemies.forEach((enemy) => {
       if (enemy.alive && this.character.isColliding(enemy)) {
         if (
-          enemy instanceof Chicken &&
-          this.character.y + this.character.height > 70&&
-          !this.character.isHurt() &&
+          enemy instanceof Chicken || enemy instanceof Duck &&
+          this.character.y + this.character.height > 70 &&
           this.character.isAboveGround() &&
           enemy.killAble
         ) {
@@ -148,7 +145,7 @@ class World {
    * @param {class} enemy - movable object
    */
   kill(enemy) {
-    if (enemy instanceof Chicken) {
+    if (enemy instanceof Chicken || enemy instanceof Duck  ) {
       enemy.killChicken();
     }
 
@@ -168,12 +165,8 @@ class World {
         this.level.endboss.energy -= 20;
         this.endbossStatusBar.setPercentage(this.level.endboss.energy);
         bottle.animate();
-
         this.deadBossSound.play();
-
-        setTimeout(() => {
-          this.level.endboss.playAnimation(this.level.endboss.IMAGES_HURT);
-        }, 1000);
+        this.level.endboss.playAnimation(this.level.endboss.IMAGES_HURT);
       }
       if (this.level.endboss.energy <= 0) {
         this.deadBossSound.play();
