@@ -1,7 +1,7 @@
 class Duck extends MoveableObject{
-    width = 80;
-    height = 60;
-    y = 380;
+    width = 50;
+    height = 40;
+    y = 375;
     alive = true;
     killAble = true;
     offset = {

@@ -108,6 +108,9 @@ class World {
         this.character.x + 75,
         this.character.y + 75
       );
+      if(bottle.y < 400){
+        bottle.animate();
+      }
       this.throwSound.play();
       this.throwableObjects.push(bottle);
       this.character.bottles -= 20;
@@ -163,6 +166,7 @@ class World {
         this.glasSound.play();
         this.throwableObjects.pop();
         this.level.endboss.energy -= 20;
+        bottle.energy = 0;
         this.endbossStatusBar.setPercentage(this.level.endboss.energy);
         bottle.animate();
         this.deadBossSound.play();
