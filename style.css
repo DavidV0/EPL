@@ -28,13 +28,7 @@ h1 {
   transform: skew(-20deg) scale(1);
   margin-top: -100px;
 }
-.fullscreen {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-}
+
 
 .container {
   margin: 0;
@@ -51,11 +45,7 @@ h1 {
   background-position: center;
 }
 
-.container-fullscreen {
-  align-items: center;
-  flex-direction: column;
-  background-position: start;
-}
+
 
 .game-over-screen {
   margin: 0;
@@ -124,20 +114,6 @@ h1 {
   gap: 8px;
 }
 
-.screen-btn-container-fullscreen {
-  display: flex;
-  position: absolute;
-  margin: 0;
-  top: 5%;
-  left: 90%;
-  z-index: 20;
-  gap: 8px;
-}
-.screen-btn-fullscreen {
-  height: 60px;
-  width: 60px;
-  cursor: pointer;
-}
 
 .screen-btn {
   height: 30px;

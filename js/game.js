@@ -2,11 +2,10 @@ let canvas;
 let ctx;
 let world;
 let keyboard = new Keyboard();
-let fullscreenBtn = document.getElementById("fullscreen-btn");
 let settingsBtn = document.getElementById("settings-btn");
 let soundBtn = document.getElementById("sound-btn");
 let isMuted = true;
-let isFullscreen = false;
+
 
 let backgroundMusic = new Audio("./audio/intro.mp3");
 backgroundMusic.volume = 0.05;
@@ -51,7 +50,7 @@ function displayWin() {
   canvas.style.display = "none";
   winSound.loop = false;
   winSound.play();
-  winSound.volume = 0.2
+  winSound.volume = 0.2;
   clearAllIntervals();
 }
 
@@ -67,7 +66,6 @@ function removeStartScreen() {
   document.getElementById("container").classList.add("d-none");
   document.getElementById("start-game-btn").classList.add("d-none");
   document.getElementById("win").classList.add("d-none");
-
 }
 
 function removeGameOverScreen() {
@@ -85,12 +83,9 @@ function removeGameOverScreen() {
 function makeButtonsVisible() {
   settingsBtn.classList.remove("d-none");
   soundBtn.classList.remove("d-none");
-  fullscreenBtn.classList.remove("d-none");
 
   settingsBtn.classList.add("screen-btn");
   soundBtn.classList.add("screen-btn");
-  fullscreenBtn.classList.add("screen-btn");
-
   bindBTNPressEvents();
 }
 
@@ -127,54 +122,6 @@ function openSettings() {
  */
 function closeSettings() {
   document.getElementById("menu-screen").classList.add("d-none");
-}
-
-/**
- * toggle fullscreen
- */
-function toggleFullscreen() {
-  let element  = document.getElementById("container")
-  let canvas = document.getElementById("canvas")
-  if (!isFullscreen) {
-    isFullscreen = true;
-    element.classList.add("container-fullscreen");
-    canvas.classList.add("fullscreen");
-    document.getElementById("screen-btn-container").classList.add("screen-btn-container-fullscreen")
-    document.getElementById("screen-btn-container").classList.remove("screen-btn-container")
-
-   enterFullScreen(element);
-  }else if(isFullscreen){
-    element.classList.remove("container-fullscreen");
-    canvas.classList.remove("fullscreen");
-    document.getElementById("screen-btn-container").classList.remove("screen-btn-container-fullscreen")
-
-    exitFullscreen();
-    isFullscreen = false;
-  }
-
-}
-
-function enterFullScreen(element){
-  if(element.requestFullscreen){
-    element.requestFullscreen();
-  }else if(element.msRequestFullscreen){ // for IE11 (remove June 15, 2022)
-    element.msRequestFullscreen()
-  }else if(element.webkitRequestFullscreen){ // iOS Safari
-    element.webkitRequestFullscreen();
-  }
-}
-
-
-function exitFullscreen(){
-  if (document.exitFullscreen) {
-    document.exitFullscreen();
-  } else if (document.mozCancelFullScreen) {
-    document.mozCancelFullScreen();
-  } else if (document.webkitExitFullscreen) {
-    document.webkitExitFullscreen();
-  } else if (document.msExitFullscreen) {
-    document.msExitFullscreen();
-  }
 }
 
 /* Alternative (quick and dirty), um alle Intervalle zu beenden. */
@@ -226,44 +173,43 @@ document.addEventListener("keyup", (e) => {
   }
 });
 
-function bindBTNPressEvents(){
-  document.getElementById("btn-left").addEventListener("touchstart", (e)=>{
+function bindBTNPressEvents() {
+  document.getElementById("btn-left").addEventListener("touchstart", (e) => {
     e.preventDefault();
     keyboard.LEFT = true;
   });
 
-  document.getElementById("btn-left").addEventListener("touchend", (e)=>{
+  document.getElementById("btn-left").addEventListener("touchend", (e) => {
     e.preventDefault();
     keyboard.LEFT = false;
   });
 
-  document.getElementById("btn-right").addEventListener("touchstart", (e)=>{
+  document.getElementById("btn-right").addEventListener("touchstart", (e) => {
     e.preventDefault();
     keyboard.RIGHT = true;
   });
 
-  document.getElementById("btn-right").addEventListener("touchend", (e)=>{
+  document.getElementById("btn-right").addEventListener("touchend", (e) => {
     e.preventDefault();
     keyboard.RIGHT = false;
   });
-  document.getElementById("btn-jump").addEventListener("touchstart", (e)=>{
+  document.getElementById("btn-jump").addEventListener("touchstart", (e) => {
     e.preventDefault();
     keyboard.SPACE = true;
   });
 
-  document.getElementById("btn-jump").addEventListener("touchend", (e)=>{
+  document.getElementById("btn-jump").addEventListener("touchend", (e) => {
     e.preventDefault();
     keyboard.SPACE = false;
   });
 
-  document.getElementById("btn-throw").addEventListener("touchstart", (e)=>{
+  document.getElementById("btn-throw").addEventListener("touchstart", (e) => {
     e.preventDefault();
     keyboard.D = true;
   });
 
-  document.getElementById("btn-throw").addEventListener("touchend", (e)=>{
+  document.getElementById("btn-throw").addEventListener("touchend", (e) => {
     e.preventDefault();
     keyboard.D = false;
   });
 }
-
