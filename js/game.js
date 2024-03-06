@@ -8,9 +8,10 @@ let isMuted = true;
 
 
 let backgroundMusic = new Audio("./audio/intro.mp3");
-backgroundMusic.volume = 0.05;
+backgroundMusic.volume = 0.02;
 let winSound = new Audio("./audio/win.mp3");
 let gameOverSound = new Audio("./audio/gameOver.mp3");
+
 
 /**
  * creates the world
@@ -36,6 +37,7 @@ function displayLose() {
   document.getElementById("game-over").classList.remove("d-none");
   document.getElementById("replay-game-btn").classList.remove("d-none");
   gameOverSound.loop = false;
+  gameOverSound.volume = 0.2
   gameOverSound.play();
   clearAllIntervals();
 }
@@ -49,8 +51,9 @@ function displayWin() {
   document.getElementById("win").classList.remove("d-none");
   canvas.style.display = "none";
   winSound.loop = false;
-  winSound.play();
   winSound.volume = 0.2;
+
+  winSound.play();
   clearAllIntervals();
 }
 

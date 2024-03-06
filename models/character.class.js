@@ -78,7 +78,6 @@ class Character extends MoveableObject {
   ];
 
   walkingSound = new Audio("./audio/walking.mp3");
-  hitSound = new Audio("./audio/hit.mp3");
 
   constructor() {
     super().loadImage("../img/2_character_pepe/2_walk/W-21.png");
@@ -97,7 +96,6 @@ class Character extends MoveableObject {
    */
   muteSounds() {
     this.walkingSound.muted = true;
-    this.hitSound.muted = true;
   }
 
   /**
@@ -105,7 +103,6 @@ class Character extends MoveableObject {
    */
   unmuteSounds() {
     this.walkingSound.muted = false;
-    this.hitSound.muted = false;
   }
 
   /**
@@ -169,7 +166,6 @@ class Character extends MoveableObject {
       } else if (this.isAboveGround()) {
         this.playAnimation(this.IMAGES_JUMPING);
       } else if (this.isHurt()) {
-        this.hitSound.play();
         this.playAnimation(this.IMAGES_HURT);
       } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
         //Walk animation

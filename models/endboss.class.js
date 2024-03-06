@@ -9,11 +9,13 @@ class Endboss extends MoveableObject {
   alive = true;
 
   offset = {
-    top: 5,
+    top: -15,
     left: 20,
-    right: 20,
+    right: 0,
     bottom: 5,
   };
+
+  bossSound = new Audio("./audio/boss_sound.mp3");
 
   IMAGES_WALKING = [
     "./img/4_enemie_boss_chicken/1_walk/G1.png",
@@ -65,6 +67,19 @@ class Endboss extends MoveableObject {
     this.loadImages(this.IMAGES_DEAD);
     this.x = 2300;
   }
+  /**
+   * mutes the sounds in the character class
+   */
+  muteSounds() {
+    this.bossSound.muted = true;
+  }
+
+  /**
+   * unmutes the sounds in the character class
+   */
+  unmuteSounds() {
+    this.bossSound.muted = false;
+  }
 
   /**
    * lets the boss attack
@@ -80,12 +95,13 @@ class Endboss extends MoveableObject {
   /**
    * lets the boss move to the left
    */
-  bossMoveLeft(){
+  bossMoveLeft() {
+    this.bossSound.volume = 0.2
+    this.bossSound.play();
     this.speed = 15;
     this.playAnimation(this.IMAGES_WALKING);
     this.moveLeft();
   }
-
 
   animate() {
     let i = 0;
@@ -94,11 +110,13 @@ class Endboss extends MoveableObject {
       if (this.alive) {
         if (this.world.character.x > 1720 && this.hadFirstContact === false) {
           this.spawnBossAnimation();
+         
         } else if (this.hadFirstContact === true && i == 14) {
+     
           this.bossAttack();
         } else if (this.hadFirstContact === true) {
           i = i % 15;
-          if(this.world.character.x > (this.x + 180)){
+          if (this.world.character.x > this.x + 180) {
             this.world.character.energy = 0;
           }
           this.bossMoveLeft();
@@ -106,7 +124,7 @@ class Endboss extends MoveableObject {
       } else if (!this.alive) {
         this.killedEndboss();
       }
-    }, 1000/10);
+    }, 1000 / 10);
   }
 
   /**
@@ -124,7 +142,6 @@ class Endboss extends MoveableObject {
   createBossStatusBar() {
     this.world.spawnEndbossStatusBar = true;
   }
-
 
   /**
    * kills the boss

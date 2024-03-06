@@ -18,6 +18,8 @@ class World {
   glasSound = new Audio("./audio/glas.mp3");
   deadBossSound = new Audio("./audio/dead_boss.mp3");
   throwSound = new Audio("./audio/throw.mp3");
+  hitSound = new Audio("./audio/hit.mp3");
+  deadChickenSound = new Audio("./audio/dead_chicken.mp3");
 
   constructor(canvas, keyboard) {
     this.canvas = canvas;
@@ -34,9 +36,11 @@ class World {
     if (isMuted) {
       this.muteSounds();
       this.character.muteSounds();
+      this.level.endboss.muteSounds();
     } else {
       this.unmuteSounds();
-      this.character.muteSounds();
+      this.character.unmuteSounds();
+      this.level.endboss.unmuteSounds();
     }
   }
 
@@ -49,6 +53,8 @@ class World {
     this.pickUpSound.muted = true;
     this.deadBossSound.muted = true;
     this.throwSound.muted = true;
+    this.hitSound.muted = true;
+    this.deadChickenSound.muted = true;
   }
 
   /**
@@ -60,6 +66,8 @@ class World {
     this.pickUpSound.muted = false;
     this.deadBossSound.muted = false;
     this.throwSound.muted = false;
+    this.hitSound.muted = false;
+    this.deadChickenSound.muted = false;
   }
 
   /**
@@ -108,7 +116,7 @@ class World {
         this.character.x + 75,
         this.character.y + 75
       );
-      if(bottle.y < 400){
+      if (bottle.y < 400) {
         bottle.animate();
       }
       this.throwSound.play();
@@ -128,17 +136,20 @@ class World {
     this.level.enemies.forEach((enemy) => {
       if (enemy.alive && this.character.isColliding(enemy)) {
         if (
-          enemy instanceof Chicken &&this.character.y + this.character.height > 60 &&
-          this.character.isAboveGround() &&
-          enemy.killAble || enemy instanceof Duck &&
-          this.character.y + this.character.height > 60 &&
-          this.character.isAboveGround() &&
-          enemy.killAble
+          (enemy instanceof Chicken &&
+            this.character.y + this.character.height > 60 &&
+            this.character.isAboveGround() &&
+            enemy.killAble) ||
+          (enemy instanceof Duck &&
+            this.character.y + this.character.height > 60 &&
+            this.character.isAboveGround() &&
+            enemy.killAble)
         ) {
           this.character.jump();
           this.kill(enemy);
         } else {
           this.character.hit();
+          this.hitSound.play();
           this.statusBar.setPercentage(this.character.energy);
         }
       }
@@ -150,8 +161,10 @@ class World {
    * @param {class} enemy - movable object
    */
   kill(enemy) {
-    if (enemy instanceof Chicken || enemy instanceof Duck  ) {
+    if (enemy instanceof Chicken || enemy instanceof Duck) {
       enemy.killChicken();
+      this.deadChickenSound.volume = 0.1;
+      this.deadChickenSound.play();
     }
 
     setTimeout(() => {
@@ -175,6 +188,7 @@ class World {
         this.level.endboss.playAnimation(this.level.endboss.IMAGES_HURT);
       }
       if (this.level.endboss.energy <= 0) {
+        this.deadBossSound.volume = 0.2;
         this.deadBossSound.play();
         this.level.endboss.alive = false;
         this.kill(this.level.endboss);
@@ -190,7 +204,8 @@ class World {
       this.level.endboss.alive &&
       this.character.isColliding(this.level.endboss)
     ) {
-      this.character.hitSound.play();
+      this.hitSound.volume = 0.2;
+      this.hitSound.play();
       this.character.hit();
       this.statusBar.setPercentage(this.character.energy);
     }
