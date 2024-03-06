@@ -1,7 +1,7 @@
 class Chicken extends MoveableObject {
   width = 80;
   height = 60;
-  y = 380;
+  y = 375;
   alive = true;
   killAble = true;
   offset = {

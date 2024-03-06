@@ -37,7 +37,7 @@ class Bottle extends MoveableObject {
 
     setInterval(() => {
 
-      if(this.energy == 0 || this.y < 365){
+      if(this.energy == 0){
       this.playAnimation(this.IMAGES_SPLASH);
       }
     }, 1000/15);

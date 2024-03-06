@@ -128,8 +128,10 @@ class World {
     this.level.enemies.forEach((enemy) => {
       if (enemy.alive && this.character.isColliding(enemy)) {
         if (
-          enemy instanceof Chicken || enemy instanceof Duck &&
-          this.character.y + this.character.height > 70 &&
+          enemy instanceof Chicken &&this.character.y + this.character.height > 60 &&
+          this.character.isAboveGround() &&
+          enemy.killAble || enemy instanceof Duck &&
+          this.character.y + this.character.height > 60 &&
           this.character.isAboveGround() &&
           enemy.killAble
         ) {
