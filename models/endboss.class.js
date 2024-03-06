@@ -80,7 +80,7 @@ class Endboss extends MoveableObject {
     setInterval(() => {
       i++;
       if (this.alive) {
-        if (this.world.character.x > 1800 && this.hadFirstContact === false) {
+        if (this.world.character.x > 1720 && this.hadFirstContact === false) {
           this.spawnBossAnimation();
         } else if (this.hadFirstContact === true && i == 14) {
           this.bossAttack();

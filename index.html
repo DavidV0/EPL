@@ -37,7 +37,7 @@
     <title>Document</title>
   </head>
   <body onload="showStartScreen()">
-    <h1>El pollo loco</h1>
+    <h1 id="headline">El pollo loco</h1>
     <div id="container">
       <button
         onclick="removeStartScreen()"
@@ -47,7 +47,6 @@
         Start Game!
       </button>
     </div>
-    <canvas id="canvas" width="720" height="480"></canvas>
     <div class="screen-btn-container" id="screen-btn-container">
       <img
         onclick="toggleMusic()"
@@ -64,6 +63,8 @@
         class="d-none"
       />
     </div>
+    <canvas id="canvas" width="720" height="480"></canvas>
+   
     <div class="menu-screen d-none" id="menu-screen">
       <div class="menu-btn close-btn">
         <img

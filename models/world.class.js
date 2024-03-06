@@ -116,7 +116,7 @@ class World {
 
       this.allowThrow = true;
 
-      }, 500)
+      }, 1000)
     }
   }
 
