@@ -28,7 +28,7 @@ h1 {
   transform: skew(-20deg) scale(1);
   margin-top: -100px;
 }
-.fullscreen{
+.fullscreen {
   position: absolute;
   top: 0;
   left: 0;
@@ -55,7 +55,6 @@ h1 {
   align-items: center;
   flex-direction: column;
   background-position: start;
-
 }
 
 .game-over-screen {
@@ -125,7 +124,7 @@ h1 {
   gap: 8px;
 }
 
-.screen-btn-container-fullscreen{
+.screen-btn-container-fullscreen {
   display: flex;
   position: absolute;
   margin: 0;
@@ -133,7 +132,6 @@ h1 {
   left: 90%;
   z-index: 20;
   gap: 8px;
-
 }
 .screen-btn-fullscreen {
   height: 60px;
@@ -216,26 +214,45 @@ h1 {
   font-family: "zabras", Arial, Helvetica, sans-serif;
 }
 
-.panel{
+.panel {
   display: none;
 }
 
-.panel-wrapper{
+.panel-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;  
+  gap: 8px;
   margin-left: 15px;
   margin-right: 15px;
-
 }
 
-.panel-wrapper img{
+.panel-wrapper img {
   width: 30px;
   height: 30px;
 }
 
+.win-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 650px;
+  height: 400px;
 
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.55);
+  border-radius: 8px;
+  border: 4px solid #ffb900;
+  animation: buttonScale 2s infinite;
+}
+
+.win-text {
+  color: #ffb900;
+  letter-spacing: 8px;
+  font-size: 48px;
+  rotate: -10deg;
+  padding: 8px;
+}
 
 /* Smartphones ----------*/
 @media (orientation: portrait) {
@@ -268,23 +285,15 @@ h1 {
 }
 
 @media only screen and (min-width: 500px) {
-  .rotate-device{
+  .rotate-device {
     display: none;
   }
-
 }
 @media only screen and (max-width: 500px) {
- 
-  .start-game-btn{
+  .start-game-btn {
     display: none;
   }
-
 }
-
-
-
-
-
 
 @media only screen and (max-width: 720px) {
   canvas {
@@ -296,7 +305,7 @@ h1 {
     background-size: contain;
   }
 
-  .start-game-btn{
+  .start-game-btn {
     position: absolute;
     margin: 0;
     top: 15%;
@@ -305,13 +314,13 @@ h1 {
     height: 36px;
   }
 
-  .screen-btn-container{
+  .screen-btn-container {
     margin: 0;
     top: 35%;
     left: 85%;
   }
 
-  .screen-btn{
+  .screen-btn {
     width: 20px;
     height: 20px;
   }
@@ -321,17 +330,11 @@ h1 {
   }
 }
 
-
 @media only screen and (max-width: 615px) {
- 
-  .start-game-btn{
+  .start-game-btn {
     top: 25%;
-
   }
-
 }
-
-
 
 @media only screen and (max-height: 480px) {
   canvas {
@@ -359,7 +362,7 @@ h1 {
     justify-content: flex-end;
   }
 
-  .panel{
+  .panel {
     position: absolute;
     width: 100%;
     top: 85%;

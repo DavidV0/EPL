@@ -4,7 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <link rel="icon" type="image/x-icon" href="./img/start_screen_buttons/favicon.svg">
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="./img/start_screen_buttons/favicon.svg"
+    />
     <style>
       @font-face {
         font-family: "zabras";
@@ -13,7 +17,6 @@
     </style>
     <script src="./models/drawable-object.class.js"></script>
     <script src="./models/moveable-object.class.js"></script>
-    <script src="./models/collectable-object.js"></script>
     <script src="./models/character.class.js"></script>
     <script src="./models/chicken.class.js"></script>
     <script src="./models/clouds.class.js"></script>
@@ -108,31 +111,33 @@
     </div>
     <div class="rotate-device" id="rotate-device">
       <div class="hint">
-          <span>please rotate your device!</span>
+        <span>please rotate your device!</span>
       </div>
-  </div>
-  <div class="panel">
-    <div class="panel-wrapper">
-      <button id="btn-left">
-        <img src="./img/start_screen_buttons/left.svg" alt="">
-      </button>
-      <button id="btn-right">
-        <img src="./img/start_screen_buttons/right.svg" alt="">
-
-      </button>
+    </div>
+    <div class="panel">
+      <div class="panel-wrapper">
+        <button id="btn-left">
+          <img src="./img/start_screen_buttons/left.svg" alt="" />
+        </button>
+        <button id="btn-right">
+          <img src="./img/start_screen_buttons/right.svg" alt="" />
+        </button>
+      </div>
+      <div class="panel-wrapper">
+        <button id="btn-jump">
+          <img src="./img/start_screen_buttons/up.svg" alt="" />
+        </button>
+        <button id="btn-throw">
+          <img src="./img/start_screen_buttons/throw.svg" alt="" />
+        </button>
+      </div>
+    </div>
+    <div id="win" class="win-container d-none">
+      <h2 class= "win-text">YOU DID IT
+        !!!</h2>
+      <h2 class= "win-text">YOU WON!!!</h2>
+      <h2 class= "win-text">CONGRATs</h2>
 
     </div>
-    <div class="panel-wrapper">
-      <button id="btn-jump">
-        <img src="./img/start_screen_buttons/up.svg" alt="">
-
-      </button>
-      <button id="btn-throw">
-        <img src="./img/start_screen_buttons/throw.svg" alt="">
-
-      </button>
-    </div>
-
-  </div>
   </body>
 </html>

@@ -47,9 +47,11 @@ function displayLose() {
 function displayWin() {
   document.getElementById("container").classList.remove("d-none");
   document.getElementById("start-game-btn").classList.remove("d-none");
+  document.getElementById("win").classList.remove("d-none");
   canvas.style.display = "none";
   winSound.loop = false;
   winSound.play();
+  winSound.volume = 0.2
   clearAllIntervals();
 }
 
@@ -64,6 +66,8 @@ function removeStartScreen() {
   canvas.style.display = "block";
   document.getElementById("container").classList.add("d-none");
   document.getElementById("start-game-btn").classList.add("d-none");
+  document.getElementById("win").classList.add("d-none");
+
 }
 
 function removeGameOverScreen() {
