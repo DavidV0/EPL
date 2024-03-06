@@ -22,15 +22,25 @@ class MoveableObject extends DrawAbleObject {
  
 
   
-
+ /** 
+   * lets the object move to the right
+   */
   moveRight() {
     this.x += this.speed;
   }
 
+  /** 
+   * lets the object move to the left
+   */
   moveLeft() {
     this.x -= this.speed;
   }
 
+
+  /**
+   * plays an array of images 
+   * @param {*} images the set of images that should be played in order
+   */
   playAnimation(images) {
     let i = this.currentImage % images.length;
     let path = images[i];
@@ -38,6 +48,10 @@ class MoveableObject extends DrawAbleObject {
     this.currentImage++;
   }
 
+
+  /**
+   * creates the movement for jumping and falling
+   */
   applyGravity() {
     setInterval(() => {
       if (this.isAboveGround() || this.speedY > 0) {
@@ -47,8 +61,13 @@ class MoveableObject extends DrawAbleObject {
     }, 1000 / 25);
   }
 
+
+  /**
+   *  checks if character is above ground
+   * @returns true if is above else false
+   */
   isAboveGround() {
-    if(this instanceof ThrowableObject){ //Throwable Objects should always fall
+    if(this instanceof ThrowableObject){ 
       return true
     }else{
       return this.y < 140;
@@ -73,6 +92,9 @@ class MoveableObject extends DrawAbleObject {
           this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
   }
 
+  /**
+   * character gets hit and loses energy
+   */
   hit() {
     this.energy -= 2;
     if (this.energy < 0) {
@@ -82,9 +104,13 @@ class MoveableObject extends DrawAbleObject {
     }
   }
 
+  /**
+   * checks when the character did get hurt so he isnt getting hurt the whole time
+   * @returns  true if character didnt get hit in some time else false
+   */
   isHurt() {
-    let timepassed = new Date().getTime() -this.lastHit; // Difference in ms
-    timepassed = timepassed / 1000; // Difference in s
+    let timepassed = new Date().getTime() -this.lastHit; 
+    timepassed = timepassed / 1000; 
     if (timepassed <= 1) {
       return true;
     } else {
@@ -92,6 +118,10 @@ class MoveableObject extends DrawAbleObject {
     }
   }
 
+  /**
+   * 
+   * @returns true when characters energy is 0
+   */
   isDead() {
     return this.energy == 0;
   }

@@ -108,34 +108,56 @@ class Character extends MoveableObject {
     this.hitSound.muted = false;
   }
 
-  animate() {
+  /**
+   * let character move to the left;
+   */
+  moveCharacterLeft() {
+    this.moveRight();
+    this.walkingSound.play();
+    this.otherDirection = false;
+  }
+
+  /**
+   * let character move to the right
+   */
+  moveCharacterRight() {
+    this.moveLeft();
+    this.walkingSound.play();
+    this.otherDirection = true;
+  }
+
+  /**
+   * sets the right position of the camera
+   */
+  setCharacterCamera() {
+    this.world.camera_x = -this.x + 100;
+  }
+
+  /**
+   * plays the right movement of the character when needed
+   */
+  characterMovement() {
     setInterval(() => {
       this.walkingSound.pause();
-
-      //lässt den Character nach links laufen
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-        this.moveRight();
-        this.walkingSound.play();
-        this.otherDirection = false;
+        this.moveCharacterLeft();
       }
-
-      //lässt den Character nach rechts laufen
       if (this.world.keyboard.LEFT && this.x > 0) {
-        this.moveLeft();
-        this.walkingSound.play();
-        this.otherDirection = true;
+        this.moveCharacterRight();
       }
-
-      //lässt den Character springen
       if (this.world.keyboard.SPACE && !this.isAboveGround()) {
         this.jump();
       }
-
-      this.world.camera_x = -this.x + 100; // +100 setzt den Character weiter nach rechts beim Start
+      this.setCharacterCamera();
     }, 1000 / 60);
+  }
 
+  /**
+   * shows the right image animations when needed
+   */
+  characterImages() {
     setInterval(() => {
-      this.playAnimation(this.IMAGES_IDLE)
+      this.playAnimation(this.IMAGES_IDLE);
       if (this.isDead()) {
         this.playAnimation(this.IMAGES_DEAD);
         if (!this.hasLost) {
@@ -154,8 +176,13 @@ class Character extends MoveableObject {
         this.playAnimation(this.IMAGES_WALKING);
       }
     }, 50);
+  }
 
-    //check for idle
+  /**
+   * checks if the character is staying stil and plays the idle animation
+   */
+
+  characterIdle(){
     let i;
     setInterval(() => {
       i++;
@@ -166,15 +193,21 @@ class Character extends MoveableObject {
         this.world.keyboard.D
       ) {
         i = 0;
-      }
-    }, 100);
-
-    setInterval(() => {
-      if (i > 25) {
+      } else if (i > 25) {
         this.playAnimation(this.IMAGES_LONG_IDLE);
       } else if (i < 10 && i > 5) {
         this.playAnimation(this.IMAGES_IDLE);
       }
-    }, 1000);
+    }, 100);
+  }
+
+  /**
+   * plays the right animation for the character
+   */
+  animate() {
+    this.characterMovement();
+    this.characterImages();
+    this.characterIdle();
+  
   }
 }

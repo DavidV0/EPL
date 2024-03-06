@@ -21,7 +21,6 @@ class World {
 
   constructor(canvas, keyboard) {
     this.canvas = canvas;
-    // diese Variable greift auf das Canvas zu lässt drauf malen
     this.ctx = canvas.getContext("2d");
     this.keyboard = keyboard;
     this.setWorld();
@@ -297,22 +296,15 @@ class World {
     this.addObjectsToMap(this.level.bottles);
     this.addObjectsToMap(this.throwableObjects);
 
-    // section for static objects
-    this.ctx.translate(-this.camera_x, 0); // set Camera pos back
-
+    this.ctx.translate(-this.camera_x, 0);
     this.addToMap(this.statusBar);
     this.addToMap(this.coinStatusBar);
     this.addToMap(this.bottelStatusBar);
-
     if (this.spawnEndbossStatusBar) {
       this.addToMap(this.endbossStatusBar);
     }
-
-    this.ctx.translate(this.camera_x, 0); // set Camera pos forward
-
+    this.ctx.translate(this.camera_x, 0);
     this.ctx.translate(-this.camera_x, 0);
-
-    //Draw() wird immer wieder ausgeführt
     let self = this;
     requestAnimationFrame(function () {
       self.draw();

@@ -55,7 +55,7 @@ loadImages(arr) {
    */
 
   setPercentage(percentage) {
-    this.percentage = percentage; // => 0 ... 5
+    this.percentage = percentage; 
     let path = this.IMAGES[this.resovleImageIndex()];
     this.img = this.imageCache[path];
   }

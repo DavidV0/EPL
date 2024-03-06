@@ -27,6 +27,9 @@ class Chicken extends MoveableObject {
     this.animate();
   }
 
+   /**
+   * plays the right animation for the chicken
+   */
   animate() {
     setInterval(() => {
       if (this.alive) {

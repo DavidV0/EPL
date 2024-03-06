@@ -12,14 +12,13 @@ class Endboss extends MoveableObject {
     left: 50,
     right: 30,
     bottom: 10,
-};
+  };
 
   IMAGES_WALKING = [
     "./img/4_enemie_boss_chicken/1_walk/G1.png",
     "./img/4_enemie_boss_chicken/1_walk/G2.png",
     "./img/4_enemie_boss_chicken/1_walk/G3.png",
     "./img/4_enemie_boss_chicken/1_walk/G4.png",
-    
   ];
 
   IMAGES_SPAWNING = [
@@ -66,24 +65,25 @@ class Endboss extends MoveableObject {
     this.x = 2300;
   }
 
+  /**
+   * lets the boss attack
+   */
+  bossAttack() {
+    this.speed = 20;
+    this.playAnimation(this.IMAGES_ATTACK);
+    this.moveLeft();
+    this.moveLeft();
+    this.moveLeft();
+  }
   animate() {
     let i = 0;
     setInterval(() => {
       i++;
-
       if (this.alive) {
         if (this.world.character.x > 1800 && this.hadFirstContact === false) {
           this.spawnBossAnimation();
         } else if (this.hadFirstContact === true && i == 14) {
-          this.speed = 20;
-          this.playAnimation(this.IMAGES_ATTACK);
-          this.moveLeft();
-          this.moveLeft();
-          this.moveLeft();
-
-
-          
-        
+          this.bossAttack();
         } else if (this.hadFirstContact === true) {
           i = i % 15;
           this.speed = 15;
@@ -96,16 +96,26 @@ class Endboss extends MoveableObject {
     }, 100);
   }
 
+  /**
+   * lets spawn the boss
+   */
   spawnBossAnimation() {
     this.playAnimation(this.IMAGES_SPAWNING);
     this.hadFirstContact = true;
     this.createBossStatusBar();
   }
 
+  /**
+   * spawn boss status bar
+   */
   createBossStatusBar() {
     this.world.spawnEndbossStatusBar = true;
   }
 
+
+  /**
+   * kills the boss
+   */
   killedEndboss() {
     setTimeout(() => {
       this.playAnimation(this.IMAGES_DEAD);
