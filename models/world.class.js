@@ -116,16 +116,15 @@ class World {
         this.character.x + 75,
         this.character.y + 75
       );
-      if (bottle.y < 400) {
-        bottle.animate();
-      }
+
       this.throwSound.play();
       this.throwableObjects.push(bottle);
-      this.character.bottles -= 20;
       this.bottelStatusBar.setPercentage(this.character.bottles);
       setTimeout(() => {
         this.allowThrow = true;
-      }, 1000);
+        bottle.splash();
+        this.glasSound.play();
+      }, 1100);
     }
   }
 
@@ -178,14 +177,15 @@ class World {
   checkCollisionsWithEndbossBottle() {
     this.throwableObjects.forEach((bottle) => {
       if (this.level.endboss.isColliding(bottle)) {
+        bottle.splash();
         this.glasSound.play();
-        this.throwableObjects.pop();
-        this.level.endboss.energy -= 20;
-        bottle.energy = 0;
-        this.endbossStatusBar.setPercentage(this.level.endboss.energy);
-        bottle.animate();
-        this.deadBossSound.play();
-        this.level.endboss.playAnimation(this.level.endboss.IMAGES_HURT);
+        setTimeout(() => {
+          this.throwableObjects.pop();
+          this.level.endboss.energy -= 5;
+          this.endbossStatusBar.setPercentage(this.level.endboss.energy);
+          this.deadBossSound.play();
+          this.level.endboss.playAnimation(this.level.endboss.IMAGES_HURT);
+        }, 200);
       }
       if (this.level.endboss.energy <= 0) {
         this.deadBossSound.volume = 0.2;
