@@ -13,13 +13,13 @@ class World {
   throwableObjects = [];
   allowThrow = true;
 
-  coinSound = new Audio("audio/coin.mp3");
-  pickUpSound = new Audio("audio/pick.mp3");
-  glasSound = new Audio("audio/glas.mp3");
-  deadBossSound = new Audio("audio/dead_boss.mp3");
-  throwSound = new Audio("audio/throw.mp3");
-  hitSound = new Audio("audio/hit.mp3");
-  deadChickenSound = new Audio("audio/dead_chicken.mp3");
+  coinSound = new Audio("./audio/coin.mp3");
+  pickUpSound = new Audio("./audio/pick.mp3");
+  glasSound = new Audio("./audio/glas.mp3");
+  deadBossSound = new Audio("./audio/dead_boss.mp3");
+  throwSound = new Audio("./audio/throw.mp3");
+  hitSound = new Audio("./audio/hit.mp3");
+  deadChickenSound = new Audio("./audio/dead_chicken.mp3");
 
   constructor(canvas, keyboard) {
     this.canvas = canvas;
