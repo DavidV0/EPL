@@ -97,14 +97,14 @@ function makeButtonsVisible() {
  */
 function toggleMusic() {
   if (isMuted) {
-    soundBtn.src = "../img/start_screen_buttons/mute.svg";
+    soundBtn.src = "img/start_screen_buttons/mute.svg";
     isMuted = false;
     backgroundMusic.play();
     backgroundMusic.loop = true;
     winSound.mute = true;
     gameOverSound.mute = true;
   } else if (!isMuted) {
-    soundBtn.src = "../img/start_screen_buttons/unmute.svg";
+    soundBtn.src = "img/start_screen_buttons/unmute.svg";
     isMuted = true;
     backgroundMusic.pause();
     backgroundMusic.loop = false;
